@@ -7,5 +7,5 @@ module.exports = {
             framework: 'vue3',
             ts: true
         }]
-    ]
+    ],
 }

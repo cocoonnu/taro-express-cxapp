@@ -1,3 +1,7 @@
+import ComponentsPlugin from 'unplugin-vue-components/webpack'
+import NutUIResolver from '@nutui/nutui-taro/dist/resolver'
+
+
 const config = {
     projectName: 'taro-express-cxapp',
     date: '2023-3-28',
@@ -9,7 +13,10 @@ const config = {
     },
     sourceRoot: 'src',
     outputRoot: 'dist',
-    plugins: [],
+    plugins: ['@tarojs/plugin-html'],
+    sass: {
+        data: `@import "@nutui/nutui-taro/dist/styles/variables-jdt.scss";`,
+    },        
     defineConstants: {
     },
     copy: {
@@ -46,7 +53,13 @@ const config = {
                     generateScopedName: '[name]__[local]___[hash:base64:5]'
                 }
             }
-        }
+        },
+
+        webpackChain(chain) {
+            chain.plugin('unplugin-vue-components').use(ComponentsPlugin({
+                resolvers: [NutUIResolver({ taro: true })]
+            }))
+        },        
     },
     h5: {
         publicPath: '/',
@@ -65,7 +78,13 @@ const config = {
                     generateScopedName: '[name]__[local]___[hash:base64:5]'
                 }
             }
-        }
+        },
+
+        webpackChain(chain) {
+            chain.plugin('unplugin-vue-components').use(ComponentsPlugin({
+                resolvers: [NutUIResolver({ taro: true })]
+            }))
+        },        
     },
     rn: {
         appName: 'taroDemo',

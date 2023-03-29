@@ -5,10 +5,22 @@ export default defineAppConfig({
     ],
 
     window: {
-        backgroundTextStyle: 'light',
+        // 下拉 loading 样式
+        backgroundTextStyle: 'dark',
+
+        // 导航栏文字颜色
+        navigationBarTextStyle: 'black',
+
+        // 底部拉伸长度
+        onReachBottomDistance: 50,
+
+        // 是否开启下拉刷新
+        enablePullDownRefresh: true,
+
+        // 窗口和导航栏背景色
         navigationBarBackgroundColor: '#fff',
-        navigationBarTitleText: 'WeChat',
-        navigationBarTextStyle: 'black'
+
+        backgroundColor: '#fff'
     },
 
     tabBar: {

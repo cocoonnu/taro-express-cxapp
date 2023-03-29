@@ -9,7 +9,7 @@
     "noImplicitAny": false,
     "allowSyntheticDefaultImports": true,
     "outDir": "lib",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false, // 关闭以声明但未取值报错
     "noUnusedParameters": true,
     "strictNullChecks": true,
     "sourceMap": true,
@@ -22,6 +22,6 @@
       "node_modules/@types"
     ]
   },
-  "include": ["./src", "./types"],
+  "include": ["./src", "./types", "components.d.ts"],
   "compileOnSave": false
 }
