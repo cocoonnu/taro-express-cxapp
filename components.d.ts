@@ -7,7 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BuyContent: typeof import('./src/components/BuyContent/index.vue')['default']
     BuyFrame: typeof import('./src/components/BuyFrame/index.vue')['default']
+    NutCheckbox: typeof import('@nutui/nutui-taro')['Checkbox']
+    NutCheckboxGroup: typeof import('@nutui/nutui-taro')['CheckboxGroup']
+    NutEmpty: typeof import('@nutui/nutui-taro')['Empty']
     NutTabPane: typeof import('@nutui/nutui-taro')['TabPane']
     NutTabs: typeof import('@nutui/nutui-taro')['Tabs']
   }

@@ -1,6 +1,6 @@
 import ComponentsPlugin from 'unplugin-vue-components/webpack'
 import NutUIResolver from '@nutui/nutui-taro/dist/resolver'
-
+import path from 'path'
 
 const config = {
     projectName: 'taro-express-cxapp',
@@ -16,7 +16,10 @@ const config = {
     plugins: ['@tarojs/plugin-html'],
     sass: {
         data: `@import "@nutui/nutui-taro/dist/styles/variables-jdt.scss";`,
-    },        
+    },
+    alias: {
+        "@": path.resolve(__dirname, "..", "src"),
+    },
     defineConstants: {
     },
     copy: {

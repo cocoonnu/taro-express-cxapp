@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BuyFrame from '../../components/BuyFrame/index.vue'
+import BuyFrame from '@/components/BuyFrame/index.vue'
 
 </script>
 
@@ -38,10 +38,10 @@ import BuyFrame from '../../components/BuyFrame/index.vue'
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(242, 245, 245, 1);
+    background: rgba(250, 252, 251, 1);
 
     .home-content {
-        margin-top: -515px;
+        margin-top: -1115px;
         color: rgba(34, 38, 37, 1);
     }
 
