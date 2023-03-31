@@ -48,9 +48,11 @@ const TabData = ref({
                     :id="item.paneKey"
                 >
 
-                    <image :src="item.src" v-if="TabData.tabvalue != item.paneKey"/>
-                    <image :src="item.srcA" v-else/>
-                    <view class="tab-title-text">{{ item.title }}</view>
+                    <view class="tab-title">
+                        <image :src="item.src" v-if="TabData.tabvalue != item.paneKey"/>
+                        <image :src="item.srcA" v-else/>
+                        <view class="tab-title-text">{{ item.title }}</view>
+                    </view>
 
                 </view>
 
@@ -86,28 +88,34 @@ const TabData = ref({
 
 
     .nut-tabs__titles {
-        height: 95px;
+        height: 100px;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         color: #222625;
         background: rgba(247, 250, 250, 1);
         overflow: hidden;
 
-        image {
-            width: 46.15px;
-            height: 46.15px; 
+        .tab-title {
+            display: flex;
+            margin-top: 35px;
+
+            image {
+                width: 46.15px;
+                height: 46.15px; 
+            }
+    
+            .tab-title-text {
+                width: 70px;
+                height: 46.15px;
+                line-height: 46.15px;
+                text-align: center;
+                font-size: 23.08px;
+                font-weight: 500; 
+                margin-left: 10px;
+            }    
         }
 
-        .tab-title-text {
-            width: 70px;
-            height: 46.15px;
-            line-height: 46.15px;
-            text-align: center;
-            font-size: 23.08px;
-            font-weight: 500; 
-            margin-left: 10px;
-        }    
 
         &.active {
             color: #14B2B5;

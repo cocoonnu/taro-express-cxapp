@@ -140,24 +140,25 @@ let checkboxGroup = ref<Array<string>>(['student'])
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 31px;
+        margin-top: 50px;
 
         .nut-checkbox__icon {
-            width: 30.77px;
-            height: 30.77px;
+            width: 55px;
+            height: 55px;
             color: #14B2B5;
+            font-size: 30px;
         }
 
         .nut-checkbox__icon--unchecked {
-            width: 30.77px;
-            height: 30.77px;
+            width: 55px;
+            height: 55px;
+            font-size: 30px;
         }
 
         .nut-checkbox__label {
-            font-size: 23px;
+            font-size: 30px;
             color: #222625;
-            margin-left: 15px;
-            margin-top: -4px;
+            margin-top: -3px;
         }
 
     }
@@ -175,7 +176,7 @@ let checkboxGroup = ref<Array<string>>(['student'])
         justify-content: center;
         align-items: center;
         padding: 0px 30.77px 0px 30.77px;        
-        margin-top: 31px;
+        margin-top: 60px;
     }
 }
 </style>
