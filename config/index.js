@@ -4,37 +4,42 @@ import path from 'path'
 
 const config = {
     projectName: 'taro-express-cxapp',
+    
     date: '2023-3-28',
+
     designWidth: 750,
-    deviceRatio: {
-        640: 2.34 / 2,
-        750: 1,
-        828: 1.81 / 2
+
+    deviceRatio: { 
+        640: 2.34 / 2, 750: 1, 828: 1.81 / 2
     },
+
     sourceRoot: 'src',
     outputRoot: 'dist',
+
     plugins: ['@tarojs/plugin-html'],
+
     sass: {
-        data: `@import "@nutui/nutui-taro/dist/styles/variables-jdt.scss";`,
+        data: `
+            @import "@nutui/nutui-taro/dist/styles/variables-jdt.scss";
+        `,
     },
+
     alias: {
         "@": path.resolve(__dirname, "..", "src"),
     },
-    defineConstants: {
-    },
-    copy: {
-        patterns: [
-        ],
-        options: {
-        }
-    },
+
+
     framework: 'vue3',
+
     compiler: 'webpack5',
+
     cache: {
-        enable: true
         // Webpack 持久化缓存配置，建议开启
-        // 默认配置请参考：https://docs.taro.zone/docs/config-detail#cache
+        enable: true
     },
+
+
+    // 小程序端配置
     mini: {
         postcss: {
             pxtransform: {
@@ -43,14 +48,18 @@ const config = {
 
                 }
             },
+
             url: {
+                // 小程序端样式允许引用本地资源
                 enable: true,
                 config: {
-                    limit: 1024 // 设定转换尺寸上限
+                    limit: 102400 // 转换尺寸上限100kb
                 }
             },
+
             cssModules: {
-                enable: false, // 默认为 false，如需使用 css modules 功能，则设为 true
+                // 默认为 false，如需使用 css modules 功能，则设为 true
+                enable: false, 
                 config: {
                     namingPattern: 'module', // 转换模式，取值为 global/module
                     generateScopedName: '[name]__[local]___[hash:base64:5]'
@@ -64,15 +73,21 @@ const config = {
             }))
         },        
     },
+
+
+    // h5端配置
     h5: {
         publicPath: '/',
+
         staticDirectory: 'static',
+
         postcss: {
             autoprefixer: {
                 enable: true,
                 config: {
                 }
             },
+
             cssModules: {
                 enable: false, 
                 // 默认为 false，如需使用 css modules 功能，则设为 true
@@ -89,6 +104,8 @@ const config = {
             }))
         },        
     },
+
+    
     rn: {
         appName: 'taroDemo',
         postcss: {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import travelAircraft from '@/assets/images/travelAircraft.png'
 </script>
 
 
@@ -6,8 +7,9 @@
     <view class="order-detail">
 
         <view class="order-detail-icon">
-            <!-- <image src="@/assets/images/orderAircraft.png"/> -->
+            <image :src="travelAircraft"/> 
         </view>
+
 
         <view class="order-detail-content">
 
@@ -18,6 +20,22 @@
                 </view>
 
                 <view class="content-pay">¥ 1680</view>
+            </view>
+
+            
+            <view class="content-time">
+                <view style="color: #B4C2C2;">出发时间：</view>
+                <view style="color: #222625;">3月2日</view>
+                <view style="color: #222625;">10:15</view>
+            </view>
+
+
+            <view class="content-seat" style="color: #B4C2C2;">02车02B号</view>
+
+
+            <view class="content-explain">
+                <view class="content-explain-item">可改签</view>
+                <view class="content-explain-item refuse">不可退票</view>
             </view>
 
         </view>
@@ -37,7 +55,6 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 31px;
 
 
     .order-detail-icon {
@@ -57,7 +74,6 @@
 
     .order-detail-content {
         width: 534.62px;
-        height: 180.77px;
         font-size: 23.06px;
         display: flex;
         flex-direction: column;
@@ -82,7 +98,44 @@
                 color: #FF8D1A;
             }
         }
-    }
 
+
+        .content-time {
+            display: flex;
+            column-gap: 8px;
+            height: 34.62px;
+            line-height: 34.62px;
+        }
+
+
+        .content-explain {
+            display: flex;
+            column-gap: 15px;
+            margin-top: 3px;
+
+
+            .content-explain-item {
+                width: 88.46px;
+                height: 30.77px;
+                font-size: 19.23px;
+                color: rgba(20, 178, 181, 1);
+                line-height: 30.77px;
+                text-align: center;
+                border-radius: 3.85px;
+                padding: 0px 15.38px 0px 15.38px;                
+                background: linear-gradient(90deg, rgba(20, 178, 181, 0.2) 0%,
+                rgba(20, 178, 181, 0) 100%);                
+
+
+                &.refuse {
+                    width: 107.69px;
+                    color: rgba(255, 141, 26, 1);
+                    background: linear-gradient(90deg, rgba(255, 141, 26, 0.2) 0%, 
+                    rgba(255, 141, 26, 0) 100%);                        
+                }
+            }
+        }
+
+    }
 }
 </style>

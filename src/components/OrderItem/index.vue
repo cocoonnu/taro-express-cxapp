@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import orderAircraft from '@/assets/images/orderAircraft.png'
+import right from '@/assets/images/right.png'
 </script>
 
 
@@ -8,7 +10,7 @@
         <view class="order-item-content">
 
             <view class="order-item-content-icon">
-                <image src="@/assets/images/orderAircraft.png"/>
+                <image :src="orderAircraft"/>
             </view>
 
 
@@ -30,7 +32,7 @@
 
         <view class="order-item-skip">
             <view style="color: #B4C2C2;">机票详情</view>
-            <image src="@/assets/images/right.png"></image>
+            <image :src="right"></image>
         </view>
     </view>
 </template>

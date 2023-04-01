@@ -64,11 +64,11 @@ const TabData = ref({
             </nut-tab-pane>
 
             <nut-tab-pane pane-key="train">
-                <view class="waiting"><nut-empty description="无数据"/></view>
+                <view class="waiting"><nut-empty description="暂无数据"/></view>
             </nut-tab-pane>
 
             <nut-tab-pane pane-key="bus">
-                <view class="waiting"><nut-empty description="无数据"/></view>
+                <view class="waiting"><nut-empty description="暂无数据"/></view>
             </nut-tab-pane>
 
         </nut-tabs>
@@ -163,6 +163,7 @@ const TabData = ref({
 
         .nut-empty__description {
             font-size: 24px;
+            color: #B4C2C2;
         }
     }
 }

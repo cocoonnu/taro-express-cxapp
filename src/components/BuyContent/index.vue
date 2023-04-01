@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import refresh from '@/assets/images/refresh.png'
 import { ref } from 'vue'
 
 let checkboxGroup = ref<Array<string>>(['student'])
@@ -14,7 +15,7 @@ let checkboxGroup = ref<Array<string>>(['student'])
             <view class="city-left city-text">南昌</view>
 
             <view class="city-refresh">
-                <image src="@/assets/images/refresh.png"/>
+                <image :src="refresh"/>
             </view>
 
             <view class="city-right city-text">杭州</view>
