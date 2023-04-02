@@ -1,9 +1,9 @@
 const express = require('express')
 const sqlQuery = require('../mysql')
-const testRouter = express.Router()
+const userRouter = express.Router()
 
 
-testRouter.get('/getUsers', async function(req, res) {
+userRouter.get('/getUsers', async function(req, res) {
 
     try {
         const result = await sqlQuery(`SELECT * FROM users`)
@@ -24,6 +24,6 @@ testRouter.get('/getUsers', async function(req, res) {
     }
 })
 
-module.exports = testRouter
+module.exports = userRouter
 
 

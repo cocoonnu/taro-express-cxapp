@@ -50,14 +50,6 @@ let checkboxGroup = ref<Array<string>>(['student'])
             查询机票
         </button>
 
-
-        <!-- 查询历史 -->
-        <view class="history-query">            
-            <!-- <view v-for="(item, index) in 3">
-                
-            </view> -->
-        </view>
-
     </view>
 </template>
 

@@ -21,7 +21,7 @@ connection.connect(err => {
 })
 
 
-// 封装查询函数
+// 封装查询函数 传入一句sql语句
 function sqlQuery(strSql) {
 
     return new Promise(function(resolve, reject) {

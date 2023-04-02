@@ -36,5 +36,29 @@ export default {
             })
 
         })
+    },
+
+
+
+    // 显示 loading 框
+    // https://nervjs.github.io/taro-docs/docs/apis/ui/interaction/showLoading
+    showLoading: function (params: any = '加载中') {
+
+        // 默认配置
+        let options = { title: params, mask: true }
+
+        // 接收直接传入title
+        if (Object.prototype.toString.call(params) === "[object Object]") {
+            // @ts-ignore
+            options = { ...options, ...params }
+        }
+
+        Taro.showLoading(options)
+    },
+
+
+    // 隐藏 loading 框
+    hideLoading: function() {
+        Taro.hideLoading()
     }
 }

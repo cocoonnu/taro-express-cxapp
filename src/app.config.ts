@@ -5,7 +5,8 @@ export default defineAppConfig({
 
     pages: [
         'pages/Home/index',
-        'pages/Order/index'
+        'pages/Order/index',
+        'pages/CityChoose/index',
     ],
 
     window: {
