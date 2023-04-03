@@ -2,7 +2,24 @@
 import refresh from '@/assets/images/refresh.png'
 import { ref } from 'vue'
 
+
+// 定义事件总线
+import { getCurrentInstance } from 'vue'
+const cxt = getCurrentInstance()
+let bus: any = null
+if (cxt) bus = cxt.appContext.config.globalProperties.$bus
+
+
+// 学生票选择框
 let checkboxGroup = ref<Array<string>>(['student'])
+
+
+// 点击选择城市函数
+function clickCity() {
+
+    // 打开选择城市组件
+    bus.emit('showCityChoose')
+}
 
 </script>
 
@@ -12,15 +29,21 @@ let checkboxGroup = ref<Array<string>>(['student'])
 
         <!-- 城市选择 -->
         <view class="air-citys">
-            <view class="city-left city-text">南昌</view>
-
-            <view class="city-refresh">
-                <image :src="refresh"/>
+            <view class="city-left city-text" @click="clickCity">
+                南昌
             </view>
 
-            <view class="city-right city-text">杭州</view>
+            <view class="city-refresh">
+                <image :src="refresh" />
+            </view>
+
+            <view class="city-right city-text" @click="clickCity">
+                杭州
+            </view>
         </view>
 
+
+        <!-- 分割线 -->
         <view class="split-line"></view>
 
 
@@ -30,6 +53,8 @@ let checkboxGroup = ref<Array<string>>(['student'])
             <view class="time-interval">2天后</view>
         </view>
 
+
+        <!-- 分割线 -->
         <view class="split-line"></view>
 
 
@@ -62,10 +87,10 @@ let checkboxGroup = ref<Array<string>>(['student'])
 
     .air-citys {
         width: 565.38px;
-        height: 92.31px;        
+        height: 92.31px;
         display: flex;
         justify-content: flex-start;
-        align-items: center;    
+        align-items: center;
         margin-bottom: 23px;
 
         .city-text {
@@ -74,7 +99,7 @@ let checkboxGroup = ref<Array<string>>(['student'])
             font-size: 46.15px;
             font-weight: 500;
             line-height: 69.23px;
-            text-align: center;            
+            text-align: center;
             color: rgba(34, 38, 37, 1);
         }
 
@@ -82,11 +107,11 @@ let checkboxGroup = ref<Array<string>>(['student'])
             display: grid;
             place-items: center;
             width: 92.31px;
-            height: 92.31px; 
-            margin: 0 144px;   
-            border-radius: 100%;        
+            height: 92.31px;
+            margin: 0 144px;
+            border-radius: 100%;
             background: linear-gradient(138.4deg, rgba(20, 178, 181, 1) 0%,
-            rgba(43, 194, 161, 1) 100%);            
+                    rgba(43, 194, 161, 1) 100%);
 
             image {
                 width: 46px;

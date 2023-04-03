@@ -7,7 +7,17 @@ const config = {
     
     date: '2023-3-28',
 
-    designWidth: 750,
+    // designWidth: 750,
+    designWidth(input) {
+
+        // 配置 NutUI 尺寸
+        if (input?.file?.replace(/\\+/g, '/').indexOf('@nutui') > -1) {
+            return 750
+        }
+
+        // 全局使用 Taro 默认的 750 尺寸
+        return 750
+    },    
 
     deviceRatio: { 
         640: 2.34 / 2, 750: 1, 828: 1.81 / 2
@@ -41,6 +51,7 @@ const config = {
 
     // 小程序端配置
     mini: {
+
         postcss: {
             pxtransform: {
                 enable: true,
@@ -67,11 +78,17 @@ const config = {
             }
         },
 
+
         webpackChain(chain) {
             chain.plugin('unplugin-vue-components').use(ComponentsPlugin({
                 resolvers: [NutUIResolver({ taro: true })]
             }))
+        },    
+        
+        miniCssExtractPluginOption: {
+            ignoreOrder: false,
         },        
+
     },
 
 

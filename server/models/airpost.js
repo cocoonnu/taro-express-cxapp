@@ -6,36 +6,39 @@ const airpostRouter = express.Router()
 airpostRouter.get('/getAirpostList', async function (req, res) {
 
     try {
-        const result = await sqlQuery(`SELECT * FROM airportList`)
+        let result = await sqlQuery(`SELECT * FROM airportList`)
 
-        // 按照首字母排序
-        // if (Array.isArray(result) && result.length) {
+        if (result.length) {
+            
+            // 按照城市名排序
+            result.sort(function(a, b) {
 
-        //     // sort方法是按照字符串到ASCII进行排序
-        //     result.sort((x, y) => {
-        //         if (x.firstLetter < y.firstLetter) {
-        //             return -1;
-        //         } else if (x.firstLetter > y.firstLetter) {
-        //             return 1;
-        //         }
-        //         return 0;
-        //     })
-        // }
+                if (a.firstLetter > b.firstLetter) return 1
+                if (a.firstLetter < b.firstLetter) return -1
+                if (a.firstLetter = b.firstLetter)  {
+
+                    if (a.cityName < b.cityName) return -1
+                    if (a.cityName > b.cityName) return 1
+                    return 0
+                }
+
+            })
 
 
-        res.send({
-            code: 200,
-            message: '请求成功',
-            data: result
-        })
+            // 过滤重复数据
+            result = result.filter(function(item, index) {
+                if (item.airportName == result[index - 1]?.airportName) return false
+                return true
+            })
+        }
+
+
+
+        res.send({ code: 200, message: '请求成功', data: result })
     } catch (error) {
 
         console.log(error)
-        res.send({
-            code: 404,
-            message: '请求失败',
-            data: null
-        })
+        res.send({ code: 404, message: '请求失败', data: null })
     }
 })
 

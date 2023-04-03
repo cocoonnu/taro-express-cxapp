@@ -50,7 +50,6 @@ function changeTabList(tab: any) {
             <!-- 订单 -->
             <OrderDetail/>
 
-
             <!-- 分隔线 -->
             <view class="split-line">
                 <view class="split-line-top">

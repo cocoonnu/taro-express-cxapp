@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import BuyFrame from '@/components/BuyFrame/index.vue'
-import OrderItem from '@/components/OrderItem/index.vue'
-import SwiperBox from '@/components/SwiperBox/index.vue'
+import CityChoose from '@/components/CityChoose/index.vue'
+// import OrderItem from '@/components/OrderItem/index.vue'
+// import SwiperBox from '@/components/SwiperBox/index.vue'
 import HomeTop from '@/components/HomeTop/index.vue'
-import Taro from '@tarojs/taro'
-import tools from '@/utils/tools'
+// import Taro from '@tarojs/taro'
+// import tools from '@/utils/tools'
+import { reactive } from 'vue'
 
 
 </script>
@@ -23,11 +25,15 @@ import tools from '@/utils/tools'
         <BuyFrame/>
 
         <!-- 订单预览组件 -->
-        <OrderItem/>
+        <!-- <OrderItem/> -->
 
         <!-- 轮播图 -->
-        <SwiperBox/>
+        <!-- <SwiperBox/> -->
 
+
+        <!-- 城市选择模态框 -->
+        <CityChoose/>
+        
     </view>
 </view>
 </template>

@@ -18,12 +18,10 @@
     "build:qq": "taro build --type qq",
     "build:jd": "taro build --type jd",
     "build:quickapp": "taro build --type quickapp",
-
     "dev:weapp": "npm run build:weapp -- --watch",
     "pro:weapp": "npm run build:weapp -- --watch --env production",
     "lint": "eslint --ext .js,.ts,.vue src",
     "server": "nodemon ./server/index.js",
-
     "dev:swan": "npm run build:swan -- --watch",
     "dev:alipay": "npm run build:alipay -- --watch",
     "dev:tt": "npm run build:tt -- --watch",
@@ -58,6 +56,7 @@
     "@tarojs/taro": "3.6.2",
     "axios": "^1.3.4",
     "express": "^4.18.2",
+    "mitt": "^3.0.0",
     "mysql2": "^3.2.0",
     "request": "^2.88.2",
     "vue": "^3.0.0"
