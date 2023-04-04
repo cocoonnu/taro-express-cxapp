@@ -6,8 +6,7 @@ import CityChoose from '@/components/CityChoose/index.vue'
 import HomeTop from '@/components/HomeTop/index.vue'
 // import Taro from '@tarojs/taro'
 // import tools from '@/utils/tools'
-import { reactive } from 'vue'
-
+// import { reactive, computed } from 'vue'
 
 </script>
 

@@ -6,6 +6,7 @@ export default defineAppConfig({
     pages: [
         'pages/Home/index',
         'pages/Order/index',
+        'pages/Calendar/index',
     ],
 
     window: {

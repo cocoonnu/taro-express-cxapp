@@ -110,9 +110,9 @@ const TabData = ref({
                 height: 46.15px;
                 line-height: 46.15px;
                 text-align: center;
-                font-size: 23.08px;
+                font-size: 25px;
                 font-weight: 500; 
-                margin-left: 10px;
+                margin-left: 12px;
             }    
         }
 
@@ -123,15 +123,15 @@ const TabData = ref({
     }
 
     #air {
-        margin-left: 45px;
+        margin-left: 43px;
     }
 
     #train {
-        margin: 0 65px;
+        margin: 0 62px;
     }
 
     #bus {
-        margin-right: 45px;
+        margin-right: 43px;
     }
 
 

@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import getCityList from '@/hooks/CityChoose/getCityList'
-import { ref, onMounted } from 'vue'
 import { getCurrentInstance, onBeforeUnmount } from 'vue'
+import { useHoemStore } from '@/store/home'
+import { ref, onMounted, computed } from 'vue'
+import Taro from '@tarojs/taro'
 
+
+// 仓库
+const hoemStore = useHoemStore()
 
 // 定义事件总线
 const cxt = getCurrentInstance()
@@ -14,7 +19,12 @@ if (cxt) bus = cxt.appContext.config.globalProperties.$bus
 onMounted(() => {
 
     // 绑定打开城市选择组件事件
-    bus.on('showCityChoose', () => { visible.value = true })
+    bus.on('showCityChoose', (cl: string) => {
+
+        // 显示组件和获取城市位置
+        visible.value = true
+        cityLocation.value = cl
+    })
 
 
     // 初始化城市数据
@@ -24,7 +34,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
     bus.off('showCityChoose')
 })
-
+ 
 
 // 组件显示与隐藏
 let visible = ref<boolean>(false)
@@ -38,9 +48,22 @@ let cityValue = ref([])
 let cityList = ref([])
 
 
+// 左边还是右边城市
+let cityLocation = ref<string>('')
+
+
 // 选择完成的回调函数
 function finshChoose(params: any) {
-    console.log(params)  // 为一个结果数组
+    // ["B", "北京", "大兴国际机场"]
+
+    if (cityLocation.value == 'left') hoemStore.leftCityName = params[1]
+    if (cityLocation.value == 'right') hoemStore.rightCityNme = params[1]
+
+    Taro.showToast({
+        title: `已选择${params[2]}`,
+        icon: 'none',
+        duration: 2000
+    })
 }
 
 
@@ -105,6 +128,11 @@ function finshChoose(params: any) {
 
     .nut-cascader-pane {
         height: 800px;
+        margin-top: 10px;
+    }
+
+    .nut-cascader-pane::-webkit-scrollbar {
+        display: none;
     }
 }
 </style>

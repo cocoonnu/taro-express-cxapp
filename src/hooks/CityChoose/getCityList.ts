@@ -49,7 +49,7 @@ export default async function(cityList: any) {
 
         result[index] = {
             value: item.title,
-            text: item.title,
+            text: `城市首字母 ${item.title}`,
             children: []
         }
 
