@@ -1,21 +1,68 @@
 <script setup lang="ts">
 import arrowLeft from '@/assets/images/arrowLeft.png'
-import { ref } from 'vue'
+import { useHoemStore } from '@/store/home'
+import { extract, extractDate, getDayDiff } from '@/utils/time'
+import tools from '@/utils/tools'
+import Taro from '@tarojs/taro'
+import { computed } from 'vue'
 
-const state = ref({
-    date: ''
+const homeStore = useHoemStore()
+
+
+// 日历默认选中日期 格式: 2023-04-05
+const chooseDate = computed(() => homeStore.chooseDate)
+
+
+// 日历开始日期 格式: 2023-04-05
+let startDate = computed(() => {    
+    const dateArr = extract(new Date())
+    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`
 })
-const setChooseValue = param => {
-    state.value.date = param[3]
+
+
+// 日历结束日期 格式: 2023-04-05
+let endDate = computed(() => {
+
+    // 获取15天后的时间戳
+    let timeCount = Date.now() +  15 * 24 * 60 * 60 * 1000
+
+    const dateArr = extract(new Date(timeCount))
+    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`
+})
+
+
+// 点击日期后触发
+function selectDate(params) {
+    // params: [0: "2023", 1: "03", 2: "15", 3: "2023-03-15", 4: "星期三"]
+
+    // 获取 Date 类型
+    const selectDateValue = new Date(params[3])
+
+    // 改变首页日期展示
+    homeStore.homeDate = extractDate(selectDateValue)
+
+    // 计算与今日天数差
+    homeStore.homeDayDiff = getDayDiff(new Date(startDate.value), selectDateValue)
+    
+
+    // 修改日历默认选中日期
+    homeStore.chooseDate = params[3]
+
+    // 显示成功信息
+    tools.showToast(`已选择${homeStore.homeDate}`)
 }
+
 </script>
 
 <template>
     <view class="calendar-container">
+
         <view class="calendar-top">
             <view class="top-content">
 
-                <image :src="arrowLeft"/>
+                <view class="top-content-icon" @click="Taro.navigateBack">
+                    <image :src="arrowLeft"/>
+                </view>
                 <view class="top-content-text">选择出发日期</view>
 
             </view>
@@ -25,20 +72,18 @@ const setChooseValue = param => {
         <view class="calendar-wrapper">
             <nut-calendar
                 :poppable="false"
-                :default-value="state.date"
+                :default-value="chooseDate"
                 :is-auto-back-fill="true"
-                @choose="setChooseValue"
-                :start-date="`2023-03-01`"
-                :end-date="`2023-4-20`"
+                :start-date="startDate"
+                :end-date="endDate"
                 :show-sub-title="false"
                 :show-title="false"
                 :show-today="false"
+                @select="selectDate"
             ></nut-calendar>
         </view>    
+
     </view>
-
-
-
 </template>
 
 <style lang="scss">
@@ -62,7 +107,6 @@ const setChooseValue = param => {
             image {
                 width: 46.15px;
                 height: 46.15px;            
-                object-fit: cover;
             }
     
             .top-content-text {
@@ -84,7 +128,7 @@ const setChooseValue = param => {
         --nut-calendar-choose-color: #14B2B5;
         --nut-calendar-choose-font-color: #fff;
         --nut-calendar-base-color: #222625;
-        --nut-calendar-disable-color: #DFE5E6;
+        // --nut-calendar-disable-color: #DFE5E6;
         --nut-calendar-base-font: 30.7px;
         --nut-calendar-text-font: 30.7px;
         --nut-calendar-month-title-font-size: 38px;
@@ -109,7 +153,7 @@ const setChooseValue = param => {
                 .nut-calendar__month-title {
                     height: 40px;
                     line-height: 40px;
-                    margin-bottom: 30px;
+                    margin-bottom: 40px;
                 }
 
                 .nut-calendar__days .nut-calendar__day {
@@ -123,10 +167,10 @@ const setChooseValue = param => {
                 margin: 25px 0;
                 box-sizing: border-box;
                 padding: 0px 25px;
-            }        
+            }  
+
         }
         
-
     }
 }
 </style>

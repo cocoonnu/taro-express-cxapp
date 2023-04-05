@@ -3,7 +3,6 @@ import Taro from '@tarojs/taro'
 export default {
 
     // 发送请求函数
-    // https://nervjs.github.io/taro-docs/docs/apis/network/request/
     request: function(options: any) {
 
         // 拆解配置参数
@@ -41,7 +40,6 @@ export default {
 
 
     // 显示 loading 框
-    // https://nervjs.github.io/taro-docs/docs/apis/ui/interaction/showLoading
     showLoading: function (params: any = '加载中') {
 
         // 默认配置
@@ -60,5 +58,24 @@ export default {
     // 隐藏 loading 框
     hideLoading: function() {
         Taro.hideLoading()
-    }
+    },
+
+
+    // 消息提示框
+    showToast: function (params: any = '成功') {
+
+        // 默认配置
+        let options = { title: params, icon: 'none', duration: 2000 }
+
+        // 接收直接传入title
+        if (Object.prototype.toString.call(params) === "[object Object]") {
+            // @ts-ignore
+            options = { ...options, ...params }
+        }
+
+        // @ts-ignore
+        Taro.showToast(options)
+    },
+    
+
 }

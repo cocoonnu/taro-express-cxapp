@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import CityContent from './CityContent/index.vue'
 import TimeContent from './TimeContent/index.vue'
+import Taro from '@tarojs/taro'
 import { ref } from 'vue'
 
 // 学生票选择框
 let checkboxGroup = ref<Array<string>>(['student'])
 
+
+// 点击查询机票
+function clickBtn() {
+    Taro.navigateTo({ url: '/pages/QueryTicket/index', })
+}
 
 </script>
 
@@ -42,9 +48,9 @@ let checkboxGroup = ref<Array<string>>(['student'])
 
 
         <!-- 查询机票按钮 -->
-        <button class="inquire-btn">
+        <view class="inquire-btn" @click="clickBtn">
             查询机票
-        </button>
+        </view>
 
     </view>
 </template>
@@ -98,6 +104,7 @@ let checkboxGroup = ref<Array<string>>(['student'])
         height: 107.69px;
         font-size: 30.77px;
         color: #fff;
+        box-sizing: border-box;
         border-radius: 15.38px;
         background: linear-gradient(138.4deg, #14B2B5 0%, #2BC2A1 100%);
         box-shadow: 0px 23.08px 46.15px 0px rgba(20, 178, 181, 0.16);        

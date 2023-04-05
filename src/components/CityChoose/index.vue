@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import getCityList from '@/hooks/CityChoose/getCityList'
-import { getCurrentInstance, onBeforeUnmount } from 'vue'
 import { useHoemStore } from '@/store/home'
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import tools from '@/utils/tools'
 import Taro from '@tarojs/taro'
 
 
 // 仓库
-const hoemStore = useHoemStore()
-
-// 定义事件总线
-const cxt = getCurrentInstance()
-let bus: any = null
-if (cxt) bus = cxt.appContext.config.globalProperties.$bus
+const homeStore = useHoemStore()
 
 
 // 组件初始化函数
 onMounted(() => {
 
     // 绑定打开城市选择组件事件
-    bus.on('showCityChoose', (cl: string) => {
+    Taro.eventCenter.on('showCityChoose', (cl: string) => {
 
         // 显示组件和获取城市位置
         visible.value = true
@@ -32,7 +27,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-    bus.off('showCityChoose')
+    Taro.eventCenter.off('showCityChoose')
 })
  
 
@@ -56,14 +51,10 @@ let cityLocation = ref<string>('')
 function finshChoose(params: any) {
     // ["B", "北京", "大兴国际机场"]
 
-    if (cityLocation.value == 'left') hoemStore.leftCityName = params[1]
-    if (cityLocation.value == 'right') hoemStore.rightCityNme = params[1]
+    if (cityLocation.value == 'left') homeStore.leftCityName = params[1]
+    if (cityLocation.value == 'right') homeStore.rightCityNme = params[1]
 
-    Taro.showToast({
-        title: `已选择${params[2]}`,
-        icon: 'none',
-        duration: 2000
-    })
+    tools.showToast(`已选择${params[2]}`)
 }
 
 

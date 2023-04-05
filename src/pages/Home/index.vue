@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import HomeTop from '@/components/HomeTop/index.vue'
 import BuyFrame from '@/components/BuyFrame/index.vue'
 import CityChoose from '@/components/CityChoose/index.vue'
 // import OrderItem from '@/components/OrderItem/index.vue'
 // import SwiperBox from '@/components/SwiperBox/index.vue'
-import HomeTop from '@/components/HomeTop/index.vue'
 // import Taro from '@tarojs/taro'
 // import tools from '@/utils/tools'
 // import { reactive, computed } from 'vue'

@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BuyContent: typeof import('./src/components/BuyContent/index.vue')['default']
     BuyFrame: typeof import('./src/components/BuyFrame/index.vue')['default']
+    CalendarTab: typeof import('./src/components/CalendarTab/index.vue')['default']
     CityChoose: typeof import('./src/components/CityChoose/index.vue')['default']
     CityContent: typeof import('./src/components/BuyContent/CityContent/index.vue')['default']
     HomeTop: typeof import('./src/components/HomeTop/index.vue')['default']

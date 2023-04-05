@@ -1,6 +1,6 @@
 export default definePageConfig({
-    
-    navigationBarTitleText: '订单中心',
+
+    navigationBarTitleText: '查询车票',
 
     navigationBarTextStyle: 'black',
 

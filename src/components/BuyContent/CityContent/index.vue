@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import refresh from '@/assets/images/refresh.png'
-import { getCurrentInstance } from 'vue'
 import { useHoemStore } from '@/store/home'
 import { storeToRefs } from 'pinia'
+import Taro from '@tarojs/taro'
 import { ref } from 'vue'
 
 // 获取首页仓库数据
@@ -10,17 +10,11 @@ const homeStore = useHoemStore()
 const { rightCityNme, leftCityName } = storeToRefs(homeStore)
 
 
-// 定义事件总线
-const cxt = getCurrentInstance()
-let bus: any = null
-if (cxt) bus = cxt.appContext.config.globalProperties.$bus
-
-
 // 点击选择城市函数
 function clickCity(cityLocation: string) {
 
     // 打开选择城市组件
-    bus.emit('showCityChoose', cityLocation)
+    Taro.eventCenter.trigger('showCityChoose', cityLocation)
 }
 
 

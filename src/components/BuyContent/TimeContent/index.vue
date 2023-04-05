@@ -1,10 +1,32 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import Taro from '@tarojs/taro'
+import { useHoemStore } from '@/store/home'
+
+// 创建仓库
+const homeStore = useHoemStore()
+
+
+let timeInterval = computed(() => {
+    return homeStore.homeDayDiff == 0 ? '今天' : `${homeStore.homeDayDiff}天后` 
+})
+
+
+function clickDate() {
+
+    Taro.navigateTo({ url: '/pages/Calendar/index', })        
+}
+
 </script>
 
 <template>
     <view class="air-time">
-        <view class="time-date">2月28日</view>
-        <view class="time-interval">2天后</view>
+
+        <view class="time-date" @click="clickDate">
+            {{ homeStore.homeDate }}
+        </view>
+
+        <view class="time-interval">{{ timeInterval }}</view>
     </view>
 </template>
 

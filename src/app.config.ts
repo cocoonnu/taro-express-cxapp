@@ -7,6 +7,7 @@ export default defineAppConfig({
         'pages/Home/index',
         'pages/Order/index',
         'pages/Calendar/index',
+        'pages/QueryTicket/index',
     ],
 
     window: {
@@ -49,4 +50,11 @@ export default defineAppConfig({
         ]
     },
 
+    "permission": {
+        "scope.userLocation": {
+            "desc": "为了更好的服务体验，我们希望获取你的位置"
+        }
+    },
+
+    "requiredPrivateInfos": ["getLocation", "chooseLocation"]
 })
