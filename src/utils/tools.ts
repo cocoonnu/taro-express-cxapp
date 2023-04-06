@@ -8,14 +8,16 @@ export default {
         // 拆解配置参数
         const {
             url, 
-            data = {} , 
+            data = {}, 
             method = 'GET', 
             ...rests
         } = options
 
+        
+        
         // 返回一个 Promise
         return new Promise(function (resolve, reject) {
-
+            
             // 发送 Taro.request
             Taro.request({
                 url, data, method, ...rests,
