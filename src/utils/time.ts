@@ -41,3 +41,10 @@ export function getWeekValue(date: Date) {
 
     return weekArr[date.getDay()]
 }
+
+
+// 返回日期格式2023-04-05
+export function formatDate(date: Date) {
+    const dateArr = extract(date)
+    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`
+}

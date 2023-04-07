@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import CalendarTab from '@/components/CalendarTab/index.vue'
-import FightContent from '@/components/FightContent/index.vue'
+import FlightInfo from '@/components/FlightInfo/index.vue'
 import { useHoemStore } from '@/store/home'
 import Taro from '@tarojs/taro'
 
@@ -33,7 +33,7 @@ const homeStore = useHoemStore()
 
 
         <!-- 航班信息区 -->
-        <FightContent/>
+        <FlightInfo/>
 
     </view>
 </template>

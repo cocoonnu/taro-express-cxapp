@@ -3,6 +3,7 @@ import calendar from '@/assets/images/calendar.png'
 import { getWeekValue } from '@/utils/time'
 import { useHoemStore } from '@/store/home'
 import { ref, onMounted } from 'vue'
+import dayjs from 'dayjs'
 
 const homeStore = useHoemStore()
 
@@ -11,7 +12,7 @@ onMounted(function () {
     // 初始化数据
     createDateArr()
 })
-
+ 
 
 // dateValueArr 单项类型
 interface DateValue {
@@ -44,10 +45,11 @@ function createDateArr() {
     for (let i = 0; i <= 15; i++) {
 
         const dateItem = new Date(todayTime + i * 24 * 60 * 60 * 1000)
+        const day = dayjs(dateItem)
 
         dateValueArr.value.push({
             date: dateItem,
-            dateValue: `${dateItem.getMonth()}-${dateItem.getDate()}`,
+            dateValue: day.format('MM-DD'),
             week: getWeekValue(dateItem)
         })
     }
@@ -63,7 +65,7 @@ function createDateArr() {
                 class="scroll-container" 
                 :scroll-x="true" 
                 style="width: 100%" 
-                :scroll-into-view="`date${pickDateIndex}`"
+                :scrollIntoView="`date${pickDateIndex}`"
                 :scrollWithAnimation="true"
             >
 
@@ -127,6 +129,10 @@ function createDateArr() {
                     background: linear-gradient(180deg, rgba(20, 178, 181, 0.2) 0%, 
                     rgba(20, 178, 181, 0.01) 100%);   
                     color: #14B2B5;
+                }
+
+                &:last-of-type {
+                    margin-right: 25px;
                 }
             }
 

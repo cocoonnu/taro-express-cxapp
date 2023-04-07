@@ -86,7 +86,8 @@ const config = {
         },    
         
         miniCssExtractPluginOption: {
-            ignoreOrder: true,
+            ignoreOrder: false,
+            // ignoreOrder: true,
         },        
 
     },

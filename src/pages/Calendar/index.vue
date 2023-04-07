@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { extract, extractDate, getDayDiff, formatDate } from '@/utils/time'
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import { useHoemStore } from '@/store/home'
-import { extract, extractDate, getDayDiff } from '@/utils/time'
 import tools from '@/utils/tools'
 import Taro from '@tarojs/taro'
 import { computed } from 'vue'
@@ -14,10 +14,7 @@ const chooseDate = computed(() => homeStore.chooseDate)
 
 
 // 日历开始日期 格式: 2023-04-05
-let startDate = computed(() => {    
-    const dateArr = extract(new Date())
-    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`
-})
+let startDate = computed(() => formatDate(new Date()))
 
 
 // 日历结束日期 格式: 2023-04-05
@@ -25,9 +22,7 @@ let endDate = computed(() => {
 
     // 获取15天后的时间戳
     let timeCount = Date.now() +  15 * 24 * 60 * 60 * 1000
-
-    const dateArr = extract(new Date(timeCount))
-    return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`
+    return formatDate(new Date(timeCount))
 })
 
 
@@ -35,7 +30,7 @@ let endDate = computed(() => {
 function selectDate(params) {
     // params: [0: "2023", 1: "03", 2: "15", 3: "2023-03-15", 4: "星期三"]
 
-    // 获取 Date 类型
+    // 选择中的 Date
     const selectDateValue = new Date(params[3])
 
     // 改变首页日期展示
@@ -44,7 +39,6 @@ function selectDate(params) {
     // 计算与今日天数差
     homeStore.homeDayDiff = getDayDiff(new Date(startDate.value), selectDateValue)
     
-
     // 修改日历默认选中日期
     homeStore.chooseDate = params[3]
 

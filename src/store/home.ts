@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import { extractDate } from '@/utils/time'
+import { extractDate, formatDate } from '@/utils/time'
 
-export const useHoemStore = defineStore('main', {
+export const useHoemStore = defineStore('home', {
 
     state: () => {
 
@@ -19,11 +19,11 @@ export const useHoemStore = defineStore('main', {
             // 首页日期展示 4月5号
             homeDate: extractDate(new Date()) as string,
 
-            // 当前选中的日期
-            chooseDate: '2023-04-05',
+            // 当前选中的日期 2023-04-05
+            chooseDate: formatDate(new Date()) as string,
 
             // 首页日期与今日天数差
-            homeDayDiff: 0 as number
+            homeDayDiff: 0 as number,
         }
     },
 
