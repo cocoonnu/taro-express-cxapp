@@ -1,4 +1,5 @@
 # http://editorconfig.org
+# 让编辑器读取该配置文件并以此来格式化代码
 root = true
 
 [*]

@@ -2,10 +2,15 @@
 import calendar from '@/assets/images/calendar.png'
 import { getWeekValue } from '@/utils/time'
 import { useHoemStore } from '@/store/home'
-import { ref, onMounted } from 'vue'
+import { useOrderStore } from '@/store/order'
+import { ref, onMounted, computed } from 'vue'
+import { extractDate, getDayDiff, formatDate } from '@/utils/time'
+import Taro from '@tarojs/taro'
+import tools from '@/utils/tools'
 import dayjs from 'dayjs'
 
 const homeStore = useHoemStore()
+const orderStore = useOrderStore()
 
 onMounted(function () {
 
@@ -23,7 +28,11 @@ interface DateValue {
 
 
 // 选中的日期序号
-let pickDateIndex = ref<number>(homeStore.homeDayDiff)
+let pickDateIndex = computed(() => homeStore.homeDayDiff)
+
+
+// 滚动条位置
+let scrollLeft = computed(() => (pickDateIndex.value * 60))
 
 
 // 16天日期数据数组
@@ -31,9 +40,21 @@ let dateValueArr = ref<Array<DateValue>>([])
 
 
 // 点击日期对象时
-function clickDateItem(date: DateValue, index: number) {
-    console.log(date)
-    pickDateIndex.value = index    
+async function clickDateItem(dateItem: DateValue) {
+
+    // 改变首页日期展示
+    homeStore.homeDate = extractDate(dateItem.date)
+    
+    // 计算与今日天数差
+    homeStore.homeDayDiff = getDayDiff(new Date(), dateItem.date)
+
+    // 修改日历默认选中日期
+    homeStore.chooseDate = formatDate(dateItem.date) 
+
+    // 刷新机票信息数组
+    tools.showLoading()
+    await orderStore.fetchFlightInfoArr()
+    tools.hideLoading()
 }
 
 
@@ -55,6 +76,7 @@ function createDateArr() {
     }
 }
 
+
 </script>
 
 <template>
@@ -65,27 +87,32 @@ function createDateArr() {
                 class="scroll-container" 
                 :scroll-x="true" 
                 style="width: 100%" 
-                :scrollIntoView="`date${pickDateIndex}`"
+                :scroll-left="scrollLeft"
                 :scrollWithAnimation="true"
+                :enhanced="true"
+                :showScrollbar="false"
             >
 
-                    <view 
-                        v-for="(item, index) in dateValueArr"
-                        class="scroll-container-item"
-                        :class="{ active: pickDateIndex == index }"
-                        @click="clickDateItem(item, index)"
-                        :id="`date${index}`"
-                    >
-                        <view class="item-date">{{ item.dateValue }}</view>
+                <view 
+                    v-for="(item, index) in dateValueArr"
+                    class="scroll-container-item"
+                    :class="{ active: pickDateIndex == index }"
+                    @click="clickDateItem(item)"
+                    :id="`date${index}`"
+                >
+                    <view class="item-date">{{ item.dateValue }}</view>
 
-                        <view class="item-week">{{ item.week }}</view>
-                    </view>
+                    <view class="item-week">{{ item.week }}</view>
+                </view>
 
             </scroll-view>
         </view>        
 
 
-        <view class="calendar-tab-right">
+        <view 
+            class="calendar-tab-right" 
+            @click="Taro.navigateTo({ url: '/pages/Calendar/index' })"
+        >
             <image :src="calendar"/>
         </view>
 

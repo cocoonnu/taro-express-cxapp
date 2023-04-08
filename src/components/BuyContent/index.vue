@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import CityContent from './CityContent/index.vue'
 import TimeContent from './TimeContent/index.vue'
-import { useOrderStore } from '@/store/order'
 import Taro from '@tarojs/taro'
 import { ref } from 'vue'
 
-const orderStore = useOrderStore()
 
 // 学生票选择框
 let checkboxGroup = ref<Array<string>>(['student'])
@@ -13,10 +11,9 @@ let checkboxGroup = ref<Array<string>>(['student'])
 
 // 点击查询机票
 async function clickBtn() {
-    Taro.navigateTo({ url: '/pages/QueryTicket/index', })
 
-    // 查询机票信息
-    orderStore.fetchFlightInfoArr()
+    // 跳转到机票页
+    Taro.navigateTo({ url: '/pages/QueryTicket/index' })
 }
 
 </script>

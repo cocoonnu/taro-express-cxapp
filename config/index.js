@@ -60,11 +60,11 @@ const config = {
                 }
             },
 
+            // 图片传base64
             url: {
-                // 小程序端样式允许引用本地资源
                 enable: true,
                 config: {
-                    limit: 102400 // 转换尺寸上限100kb
+                    limit: 10240 // 转换尺寸上限10kb
                 }
             },
 
@@ -86,8 +86,8 @@ const config = {
         },    
         
         miniCssExtractPluginOption: {
-            ignoreOrder: false,
-            // ignoreOrder: true,
+            // ignoreOrder: false,
+            ignoreOrder: true,
         },        
 
     },

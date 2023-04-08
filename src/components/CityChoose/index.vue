@@ -11,7 +11,7 @@ const homeStore = useHoemStore()
 
 
 // 组件初始化函数
-onMounted(() => {
+onMounted(async () => {
 
     // 绑定打开城市选择组件事件
     Taro.eventCenter.on('showCityChoose', (cl: string) => {
@@ -20,7 +20,7 @@ onMounted(() => {
         visible.value = true
         cityLocation.value = cl
     })
-
+    
 
     // 初始化城市数据
     getCityList(cityList)
@@ -51,7 +51,11 @@ let cityLocation = ref<string>('')
 function finshChoose(params: any) {
     // ["B", "北京", "大兴国际机场"]
 
-    if (cityLocation.value == 'left') homeStore.leftCityName = params[1]
+    if (cityLocation.value == 'left') {
+        homeStore.leftCityName = params[1]
+        homeStore.startPlace = params[2]
+    }
+    
     if (cityLocation.value == 'right') homeStore.rightCityNme = params[1]
 
     tools.showToast(`已选择${params[2]}`)

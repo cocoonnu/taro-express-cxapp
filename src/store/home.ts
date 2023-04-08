@@ -13,6 +13,9 @@ export const useHoemStore = defineStore('home', {
             // 首页左边城市
             leftCityName: '南昌' as string,
 
+            // 首页出发城市机场
+            startPlace: '昌北国际机场' as string,
+
             // 首页左边城市
             rightCityNme: '杭州' as string,
 

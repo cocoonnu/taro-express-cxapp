@@ -5,4 +5,6 @@ export default definePageConfig({
     navigationBarTextStyle: 'black',
 
     navigationStyle: 'custom',
+
+    backgroundTextStyle: 'dark',
 })

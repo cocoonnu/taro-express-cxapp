@@ -24,7 +24,7 @@ import CityChoose from '@/components/CityChoose/index.vue'
         <BuyFrame/>
 
         <!-- 订单预览组件 -->
-        <!-- <OrderItem/> -->
+        <OrderItem/>
 
         <!-- 轮播图 -->
         <!-- <SwiperBox/> -->
@@ -39,8 +39,6 @@ import CityChoose from '@/components/CityChoose/index.vue'
 
 
 <style lang="scss">
-@import "@/assets/base64/bgurl.scss";
-
 .home-container {
     min-height: 100vh;
     display: flex;
@@ -51,10 +49,9 @@ import CityChoose from '@/components/CityChoose/index.vue'
     .home-background {
         width: 100%;
         height: 1300px;
-        background: url($backgroundUrl) no-repeat;
+        background: url('../../assets/images/background.png') no-repeat;
         background-size: cover;
     }
-
 
     .home-content {
         margin-top: -1145px;

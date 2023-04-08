@@ -10,6 +10,6 @@ export function getAirpostList() {
     return tools.request({ url: `${baseURL}/airpost/getAirpostList`})
 }
 
-export function getflightList(data: any) {   
+export function getflightList(data: any) {
     return tools.request({ url: `${baseURL}/flight/getflightList`, data })
 }

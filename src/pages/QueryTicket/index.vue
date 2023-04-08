@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import CalendarTab from '@/components/CalendarTab/index.vue'
-import FlightInfo from '@/components/FlightInfo/index.vue'
 import { useHoemStore } from '@/store/home'
+import { defineAsyncComponent } from 'vue'
 import Taro from '@tarojs/taro'
+
+// 引入异步组件
+const FlightInfo = defineAsyncComponent(() => import('@/components/FlightInfo/index.vue'))
 
 const homeStore = useHoemStore()
 
@@ -33,7 +36,24 @@ const homeStore = useHoemStore()
 
 
         <!-- 航班信息区 -->
-        <FlightInfo/>
+        <Suspense>
+            <template v-slot:default>
+                <FlightInfo/>
+            </template>
+
+            <template v-slot:fallback>
+                <view class="loading">
+                    <nut-skeleton 
+                        row="4" 
+                        width="330px" 
+                        height="20px" 
+                        title animated 
+                        v-for="item in 4"
+                        :key="item"
+                    ></nut-skeleton>
+                </view>
+            </template>
+        </Suspense>        
 
     </view>
 </template>
@@ -68,6 +88,19 @@ const homeStore = useHoemStore()
                 margin-left: 190px;
             }
         }
+    }
+
+    .loading {
+        width: 100%;
+        height: calc(100vh - 311px);
+        padding: 50px 46px 0 46px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        row-gap: 60px;
+        background-color: #fff;
     }
 
 }

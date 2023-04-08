@@ -27,11 +27,12 @@ export const useOrderStore = defineStore('order', {
             let res: any = await getflightList({
                 chooseDate: homeStore.chooseDate,
                 leftCityName: homeStore.leftCityName,
-                rightCityName: homeStore.rightCityNme
+                rightCityName: homeStore.rightCityNme,
+                startPlace: homeStore.startPlace
             })
 
-            // console.log(res)
-            this.flightInfoArr = res.data
+            // console.log(res.data)
+            if (res) this.flightInfoArr = res.data
         }
 
 
@@ -42,7 +43,7 @@ export const useOrderStore = defineStore('order', {
 interface FlightInformation {
     startDayDate: string,
     startWeek: string,
-    endDayDat: string,
+    endDayDate: string,
     endWeek: string,
     startTime: string,
     endTime: string,
@@ -50,4 +51,6 @@ interface FlightInformation {
     leftCityName: string,
     rightCityName: string,
     timeDiff: string,
+    startPlace: string,
+    price: number
 }

@@ -8,17 +8,19 @@ const utc = require('dayjs/plugin/utc')
 dayjs.extend(customParseFormat)
 dayjs.extend(utc)
 
+// 一个机票的信息如下：
+// 日期 02月13日 周一
+// 起始结束时间 08:50
+// 时间差 1小时40分
+// 起始结束地址 南昌杭州
+// 航班：EU2280
+// 价格：1600
+// 出发机场：大连周水子机场1号航站楼出发
 
 flightRouter.get('/getflightList', async function(req, res) {
 
-    // 一个机票的信息如下：
-    // 日期 02月13日 周一
-    // 起始结束时间 08:50  
-    // 时间差 1小时40分
-    // 起始结束地址 南昌杭州
-    // 航班：EU2280
 
-    const { chooseDate, rightCityName, leftCityName } = req.query
+    const { chooseDate, rightCityName, leftCityName, startPlace } = req.query
 
     // 生成起始日期
     const startDay = dayjs.utc(`${chooseDate}`, 'YYYY-MM-DD')
@@ -28,7 +30,7 @@ flightRouter.get('/getflightList', async function(req, res) {
 
 
     // 航班数组长度
-    const flightLength = Random.natural(8, 15)
+    const flightLength = Random.natural(4, 10)
 
     // 航班数组
     const flightArr = []
@@ -70,7 +72,9 @@ flightRouter.get('/getflightList', async function(req, res) {
             flightNum,
             leftCityName,
             rightCityName,
-            timeDiff: `${hour}小时${min}分钟`
+            timeDiff: `${hour}小时${min}分钟`,
+            price: Random.integer(500, 2000),
+            startPlace: `${startPlace}${Random.integer(1, 9)}号航站楼`
         })
 
     }
