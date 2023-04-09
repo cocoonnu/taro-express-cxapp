@@ -13,3 +13,7 @@ export function getAirpostList() {
 export function getflightList(data: any) {
     return tools.request({ url: `${baseURL}/flight/getflightList`, data })
 }
+
+export function getLoginKey(data: any) {
+    return tools.request({ url: `${baseURL}/login/getLoginKey`, data })
+}

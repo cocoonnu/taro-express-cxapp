@@ -17,18 +17,61 @@ const homeStore = useHoemStore()
 
 onMounted(function() {
 
-    // 获取城市经纬度
-    Taro.getLocation({
-        type: 'gcj02',
-
-        success: function (res) {
-            const latitude = res.latitude
-            const longitude = res.longitude
-
-            getCityLocation(latitude, longitude)
-        }
-    })    
+    applyLocation()
 })
+
+
+// 申请地理位置授权
+async function applyLocation() {
+
+    let res = await Taro.getSetting()
+
+    const scope = 'scope.userFuzzyLocation'
+
+    // 未授权
+    if (!res.authSetting[scope]) {
+
+        // 申请授权
+        Taro.authorize({
+            scope,
+
+            success() {          
+                Taro.getFuzzyLocation({
+                    type: 'gcj02',
+
+                    success: function (res) {
+                        const latitude = res.latitude
+                        const longitude = res.longitude
+
+                        getCityLocation(latitude, longitude)
+                    },
+
+                    fail() {
+                        console.log('无法获取定位')
+                    },
+                })
+            },
+
+            fail() {
+                console.log('您拒绝了地理位置申请')
+            },
+
+        })
+        
+    }    
+
+    // 已授权
+    if (res.authSetting[scope]) {
+
+        const cityName = Taro.getStorageSync('cityName')
+
+        // 更新顶部城市名
+        homeStore.homeTopCity = cityName
+
+        // 更新左边城市名
+        homeStore.leftCityName = cityName.substr(0, cityName.length - 1)
+    }
+}
 
 
 // 获取城市定位
@@ -50,6 +93,9 @@ function getCityLocation(lat, lng) {
 
             // 更新左边城市名
             homeStore.leftCityName = cityName.substr(0, cityName.length - 1)
+
+            // 存储定位城市
+            Taro.setStorageSync('cityName', cityName)
         },
 
         fail: function() {

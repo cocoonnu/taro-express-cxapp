@@ -8,6 +8,7 @@ export default defineAppConfig({
         'pages/Order/index',
         'pages/Calendar/index',
         'pages/QueryTicket/index',
+        'pages/WeLogin/index',
     ],
 
     window: {
@@ -51,10 +52,10 @@ export default defineAppConfig({
     },
 
     "permission": {
-        "scope.userLocation": {
+        "scope.userFuzzyLocation": {
             "desc": "为了更好的服务体验，我们希望获取你的位置"
-        }
+        },
     },
 
-    "requiredPrivateInfos": ["getLocation", "chooseLocation"]
+    "requiredPrivateInfos": ["getFuzzyLocation"]
 })

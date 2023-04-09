@@ -14,7 +14,6 @@ export default {
         } = options
 
         
-        
         // 返回一个 Promise
         return new Promise(function (resolve, reject) {
             

@@ -4,4 +4,5 @@ module.exports = function(app) {
     app.use('/user', require('./user'))
     app.use('/airpost', require('./airpost'))
     app.use('/flight', require('./flight'))
+    app.use('/login', require('./login'))
 }
