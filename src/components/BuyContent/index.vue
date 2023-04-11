@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CityContent from './CityContent/index.vue'
 import TimeContent from './TimeContent/index.vue'
+import checkLogin from '@/utils/checkLogin'
 import Taro from '@tarojs/taro'
 import { ref } from 'vue'
 
@@ -12,8 +13,21 @@ let checkboxGroup = ref<Array<string>>(['student'])
 // 点击查询机票
 async function clickBtn() {
 
-    // 跳转到机票页
-    Taro.navigateTo({ url: '/pages/QueryTicket/index' })
+    // 判断是否登录
+    let res = await checkLogin()
+
+    if (res) {
+
+        // 跳转到机票页
+        Taro.navigateTo({ url: '/pages/QueryTicket/index' })
+    } else {
+
+        // 跳转到登录页
+        Taro.navigateTo({
+            url: '/pages/WeLogin/index?path=/pages/QueryTicket/index'
+        })
+    }
+
 }
 
 </script>

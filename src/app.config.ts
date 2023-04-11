@@ -9,6 +9,7 @@ export default defineAppConfig({
         'pages/Calendar/index',
         'pages/QueryTicket/index',
         'pages/WeLogin/index',
+        'pages/OrderDetail/index',
     ],
 
     window: {

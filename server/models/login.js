@@ -1,11 +1,11 @@
 const express = require('express')
-const sqlQuery = require('../mysql')
 const axios = require('axios')
 const loginRouter = express.Router()
 const jwt = require('jsonwebtoken') // 生成token字符串
 const secretKey = 'weapplogin' // 定义 secret 密钥
 
 
+// 登录接口
 loginRouter.get('/getLoginKey', async function (req, res) {
 
     const { code } = req.query
@@ -31,7 +31,7 @@ loginRouter.get('/getLoginKey', async function (req, res) {
                 openid: result.data.openid
 
                 // 设置有效期
-            }, secretKey, { expiresIn: '24h' })
+            }, secretKey, { expiresIn: '7days' })
 
             res.send({
                 code: 200,
@@ -58,6 +58,34 @@ loginRouter.get('/getLoginKey', async function (req, res) {
         })
         console.log(error)
     }
+
+})
+
+
+// 检查是否登录接口
+loginRouter.get('/checkLoginKey', function(req, res) {
+
+    const { loginToken } = req.query
+
+    // @ts-ignore
+    jwt.verify(loginToken, secretKey, function (err, decoded) {
+        if (err) {
+
+            res.send({
+                code: 404,
+                message: '未登录',
+                data: false
+            })
+
+        } else {
+
+            res.send({
+                code: 200,
+                message: '已登录',
+                data: true,
+            })
+        }
+    })
 
 })
 

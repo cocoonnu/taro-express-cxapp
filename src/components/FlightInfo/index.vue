@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { useOrderStore } from '@/store/order'
 import FlightItem from './FlightItem/index.vue'
+import Taro from '@tarojs/taro'
 const orderStore = useOrderStore()
 
 
@@ -15,6 +16,18 @@ let filghtArr = computed(() => orderStore.flightInfoArr)
 
 // 滚动条位置
 let scrollTop = ref<number>(0)
+
+
+// 跳转到订单详细页
+function goOrderDetail(flightItemInfo) {
+
+    // 设置当前详情页订单信息
+    orderStore.flightItemInfo = flightItemInfo
+
+    Taro.navigateTo({
+        url: '/pages/OrderDetail/index',
+    })
+}
 
 </script>
 
@@ -38,6 +51,7 @@ let scrollTop = ref<number>(0)
                 class="scroll-view-item" 
                 v-for="(item, index) in filghtArr"
                 :key="index"
+                @click="goOrderDetail(item)"
             >
                 <FlightItem :flightItemInfo="item"/>
             </view>

@@ -77,9 +77,15 @@ const homeStore = useHoemStore()
             justify-content: flex-start;
             align-items: center;
 
-            image {
+            .top-content-icon {
                 width: 46.15px;
                 height: 46.15px;
+
+                image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
 
             .top-content-text {

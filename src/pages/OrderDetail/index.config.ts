@@ -1,0 +1,10 @@
+export default definePageConfig({
+
+    navigationBarTitleText: '确认订单',
+
+    navigationBarTextStyle: 'black',
+
+    navigationStyle: 'custom',
+
+    backgroundTextStyle: 'dark',
+})

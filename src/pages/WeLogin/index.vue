@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import loginpng from '@/assets/images/login.png'
-import { getLoginKey, getUsersData } from '@/utils/api'
+import { getLoginKey } from '@/utils/api'
 import Taro from '@tarojs/taro'
 import tools from '@/utils/tools'
 
 
 // 返回上一页
 async function goBack() {
-    // Taro.navigateBack()
-    console.log(111)
-    
-    let res = await getUsersData()
-    console.log(res)
+    Taro.navigateBack()    
 }
 
 
-// 首次微信登录
+// 微信登录
 async function weChatLogin() {
     tools.showLoading()
 
@@ -43,7 +39,7 @@ async function weChatLogin() {
         fail: function(res) {
             tools.hideLoading()
             loginCallBack(0)
-            console.log(res)
+            console.log('登录请求失败！',res)
         },
     })
 }
@@ -59,7 +55,16 @@ function loginCallBack(status: number) {
             showCancel: false,
     
             success: function () {
-                console.log('xxxx')
+
+                const path: any = Taro.getCurrentInstance().router?.params.path
+
+                // 跳转到下一页
+                if (path == '/pages/Order/index') {
+                    Taro.switchTab({ url: path })
+                } else {
+                    Taro.navigateTo({ url: path })
+                }
+
             }
         })    
     }
@@ -67,12 +72,8 @@ function loginCallBack(status: number) {
     if (status == 0) {
         Taro.showModal({
             title: '登录失败',
-            content: '请再尝试一下',
+            content: '请再尝试一次',
             showCancel: false,
-
-            success: function () {
-                console.log('xxxx')
-            }
         })
     }
 }

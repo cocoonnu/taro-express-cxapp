@@ -16,7 +16,16 @@ export default {
         
         // 返回一个 Promise
         return new Promise(function (resolve, reject) {
-            
+
+            // 发送请求前做的事
+            // Taro.addInterceptor(function(chain) {
+            //     const requestParams = chain.requestParams
+            //     const { method, data, url } = requestParams
+
+            //     return chain.proceed(requestParams).then(res => res)
+            // })            
+
+
             // 发送 Taro.request
             Taro.request({
                 url, data, method, ...rests,

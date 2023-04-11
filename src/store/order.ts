@@ -11,7 +11,10 @@ export const useOrderStore = defineStore('order', {
         return {
 
             // 机票信息数组
-            flightInfoArr: [] as Array<FlightInformation>
+            flightInfoArr: [] as Array<FlightInformation>,
+
+            // 详情页订单信息
+            flightItemInfo: {} as FlightInformation
         }
     },
 

@@ -65,11 +65,34 @@ async function applyLocation() {
 
         const cityName = Taro.getStorageSync('cityName')
 
-        // 更新顶部城市名
-        homeStore.homeTopCity = cityName
+        if (cityName) {
 
-        // 更新左边城市名
-        homeStore.leftCityName = cityName.substr(0, cityName.length - 1)
+            // 更新顶部城市名
+            homeStore.homeTopCity = cityName
+    
+            // 更新左边城市名
+            homeStore.leftCityName = cityName.substr(0, cityName.length - 1)
+
+        } else {
+            console.log('已授权，获取定位中')
+            
+
+            // 获取定位
+            Taro.getFuzzyLocation({
+                type: 'gcj02',
+
+                success: function (res) {
+                    const latitude = res.latitude
+                    const longitude = res.longitude
+
+                    getCityLocation(latitude, longitude)
+                },
+
+                fail() {
+                    console.log('无法获取定位')
+                },
+            })
+        }
     }
 }
 

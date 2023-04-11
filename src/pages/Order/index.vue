@@ -2,7 +2,25 @@
 import downIcon from '@/assets/images/down.png'
 import OrderDetail from '@/components/OrderDetail/index.vue'
 import OrderNull from '@/assets/images/null.png'
+import checkLogin from '@/utils/checkLogin'
+import Taro from '@tarojs/taro'
+import { useLoad } from '@tarojs/taro'
 import { ref } from 'vue'
+
+
+// 如果未登录则跳转
+useLoad(async function() {
+    // 判断是否登录
+    let res = await checkLogin()
+
+    if (!res) {
+
+        // 跳转到登录页
+        Taro.navigateTo({
+            url: '/pages/WeLogin/index?path=/pages/Order/index'
+        })
+    }
+})
 
 
 const orderTabValue = ref<number>(0)
