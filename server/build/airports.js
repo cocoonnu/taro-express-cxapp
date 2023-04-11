@@ -1,10 +1,10 @@
-// airportList数据库表
+// 创建并初始化airportList表
 
 const sqlQuery = require('../mysql')
 const axios = require('axios')
 
  
-async function buildAirPortList() {
+module.exports.buildAirPortList = async function() {
 
     // @ts-ignore
     let { data } = await axios.get('https://www.brown77.cn/city/airportList')
@@ -44,15 +44,11 @@ async function buildAirPortList() {
     // 判断是否成功
     try {
         await Promise.all(promiseAll)
-        console.log('成功全部爬取数据！')
+        console.log('成功爬取机场数据！')
 
     } catch (error) {
         console.log(error)
     }
 }
-
-
-buildAirPortList()
-
 
 

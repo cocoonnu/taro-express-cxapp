@@ -3,58 +3,77 @@ import arrowLeft from '@/assets/images/arrowLeft.png'
 import loginpng from '@/assets/images/login.png'
 import { getLoginKey, getUsersData } from '@/utils/api'
 import Taro from '@tarojs/taro'
+import tools from '@/utils/tools'
 
 
 // 返回上一页
-function goBack() {
-    Taro.navigateBack()
-}
-
-// 点击登录
-async function clickLogin() {
-
-
+async function goBack() {
+    // Taro.navigateBack()
+    console.log(111)
     
-    // Taro.login({
-
-    //     success: async function (res) {
-
-    //         let result = await getLoginKey({ code: res.code })
-    //         console.log(result)
-    //     },
-
-    //     fail(res) {
-    //         console.log(res)
-    //     },
-    // })
+    let res = await getUsersData()
+    console.log(res)
 }
 
 
-// 申请用户信息授权
-async function applyUser() {
+// 首次微信登录
+async function weChatLogin() {
+    tools.showLoading()
 
-    let res = await Taro.getSetting()
-    const scope = 'scope.userFuzzyLocation'
+    Taro.login({
 
-    // 未授权
-    if (!res.authSetting[scope]) {
+        success: async function (res) {
+            tools.hideLoading()
 
-        // 申请授权
-        Taro.authorize({
-            scope,
+            let result: any = await getLoginKey({ code: res.code })
+            console.log(result)
 
-            success() {
-                // ...调用api 最好将结果存储下来
-            },
+            if (result.code == 200) {
 
-            fail() {
-                console.log('您拒绝了地理位置申请')
-            },
-        })
+                // 存储 token
+                Taro.setStorageSync('loginToken', result.data)
+                loginCallBack(1)
+
+            } else {
+                // 登录失败
+                loginCallBack(0)
+            }
+        },
+
+        fail: function(res) {
+            tools.hideLoading()
+            loginCallBack(0)
+            console.log(res)
+        },
+    })
+}
+
+
+// 登录成功的回调
+function loginCallBack(status: number) {
+
+    if (status == 1) {
+        Taro.showModal({
+            title: '登录成功',
+            content: '页面即将跳转',
+            showCancel: false,
+    
+            success: function () {
+                console.log('xxxx')
+            }
+        })    
     }
 
-    // 已授权
-    if (res.authSetting[scope]) {
+    if (status == 0) {
+        Taro.showModal({
+            title: '登录失败',
+            content: '请再尝试一下',
+            showCancel: false,
+
+            success: function () {
+                console.log('xxxx')
+            }
+        })
     }
 }
 
@@ -64,7 +83,9 @@ async function applyUser() {
     <view class="login-container">
 
         <view class="login-top">
-            <image :src="arrowLeft" @click="goBack"/>            
+            <view @click="goBack">
+                <image :src="arrowLeft"/>            
+            </view>
             <view class="login-top-text">身份验证</view>
         </view>
 
@@ -75,7 +96,7 @@ async function applyUser() {
 
         <view class="login-image"><image :src="loginpng"/></view>
 
-        <button class="login-bth" @click="clickLogin" open-type="getUserInfo">
+        <button class="login-bth" @click="weChatLogin" open-type="getUserInfo">
             一键微信登录
         </button>
 
