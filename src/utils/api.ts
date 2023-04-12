@@ -23,3 +23,7 @@ export function getLoginKey(data: any) {
 export function checkLoginKey(data: any) {
     return tools.request({ url: `${baseURL}/login/checkLoginKey`, data })
 }
+
+export function addOrderItem(data: any) {
+    return tools.request({ url: `${baseURL}/order/addOrderItem`, data })
+}

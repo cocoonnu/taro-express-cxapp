@@ -3,11 +3,45 @@ import arrowLeft from '@/assets/images/arrowLeft.png'
 import uncolor from '@/assets/images/uncolor.png'
 import color from '@/assets/images/color.png'
 import { useOrderStore } from '@/store/order'
+import { addOrderItem } from '@/utils/api'
+import tools from '@/utils/tools'
 import Taro from '@tarojs/taro'
 
+
 const orderStore = useOrderStore()
+ 
+async function clickOrderBtn() {
+    tools.showLoading()
 
+    let res: any = await addOrderItem({
+        loginToken: Taro.getStorageSync('loginToken'),
 
+        orderItem: {
+            startDayDate: orderStore.flightItemInfo.startDayDate,
+            startTime: orderStore.flightItemInfo.startTime,
+            flightNum: orderStore.flightItemInfo.flightNum,
+            startPlace: orderStore.flightItemInfo.startPlace,
+            price: orderStore.flightItemInfo.price,
+            rightCityName: orderStore.flightItemInfo.rightCityName,
+            leftCityName: orderStore.flightItemInfo.leftCityName
+        }
+    })
+
+    tools.hideLoading()
+
+    Taro.showModal({
+        title: res.message,
+        content: res.data,
+        showCancel: false,
+
+        success: function () {
+
+            if (res.code == 200) {
+                Taro.switchTab({ url: '/pages/Order/index' })
+            }
+        }
+    })
+}
 </script>
 
 <template>
@@ -48,7 +82,7 @@ const orderStore = useOrderStore()
         </view>
 
         <view class="order-detail-seat">
-            <view class="seat-title">座位选择</view>
+            <view class="seat-title">座位预览</view>
             <view class="seat-image"><image :src="color"/></view>
             <view class="seat-image"><image :src="uncolor"/></view>
             <view class="seat-text">
@@ -56,7 +90,9 @@ const orderStore = useOrderStore()
             </view>
         </view>
 
-        <button class="order-detail-bth">提交订单</button>
+        <view class="order-detail-bth" @click="clickOrderBtn">
+            提交订单
+        </view>
     </view>
 </template>
 

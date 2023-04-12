@@ -1,6 +1,13 @@
 import { getAirpostList } from '@/utils/api'
+import Taro from '@tarojs/taro'
 
 export default async function(cityList: any) {
+
+    // 如果有存储则直接返回
+    if (Taro.getStorageSync('cityList')) {
+        cityList.value = Taro.getStorageSync('cityList')
+        return
+    }
 
     // 初始化
     for (let i = 0; i < 26; i++) {
@@ -80,7 +87,9 @@ export default async function(cityList: any) {
         })
     })
 
-
     cityList.value = result
     // console.log(cityList.value)
+
+    // 存储结果
+    Taro.setStorageSync('cityList', result)
 }

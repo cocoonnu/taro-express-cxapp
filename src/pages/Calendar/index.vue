@@ -135,7 +135,7 @@ function selectDate(params) {
         .nut-calendar {
 
             .nut-calendar__content .nut-calendar__panel {
-                margin-top: 50px;
+                // margin-top: 50px;
                 height: 100%!important;
     
                 .nut-calendar__month {
@@ -155,12 +155,16 @@ function selectDate(params) {
                 }
             }
             
-            .nut-calendar__header .nut-calendar__weekdays {
-                box-shadow: none;
-                font-size: 30px;
-                margin: 25px 0;
-                box-sizing: border-box;
-                padding: 0px 25px;
+            .nut-calendar__header {
+                margin-bottom: 50px;
+
+                .nut-calendar__weekdays {
+                    box-shadow: none;
+                    font-size: 30px;
+                    margin: 25px 0;
+                    box-sizing: border-box;
+                    padding: 0px 25px;
+                }
             }  
 
         }

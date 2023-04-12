@@ -5,4 +5,5 @@ module.exports = function(app) {
     app.use('/airpost', require('./airpost'))
     app.use('/flight', require('./flight'))
     app.use('/login', require('./login'))
+    app.use('/order', require('./order'))
 }

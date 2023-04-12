@@ -22,13 +22,19 @@ module.exports.buildUserInfoList = async function() {
             rightCityName char(50) not null,
             price char(50) not null,
             startPlace char(50) not null,
-            primary key (openid)
+            primary key (flightNum)
         );
     `
 
-    // 创建表
-    await sqlQuery(`drop table if exists userInfoList`)
-    await sqlQuery(strSql)
-
-    console.log('成功创建用户订单数据表')
+    try {
+        
+        // 创建表
+        await sqlQuery(`drop table if exists userInfoList`)
+        await sqlQuery(strSql)
+    
+        console.log('成功创建用户订单数据表')
+    } catch (error) {
+        console.log('创建用户订单数据表失败')        
+        console.log(error)
+    }
 }

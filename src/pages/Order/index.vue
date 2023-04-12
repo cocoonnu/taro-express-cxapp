@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import downIcon from '@/assets/images/down.png'
-import OrderDetail from '@/components/OrderDetail/index.vue'
 import OrderNull from '@/assets/images/null.png'
 import checkLogin from '@/utils/checkLogin'
+import OrderScroll from '@/components/OrderScroll/index.vue'
 import Taro from '@tarojs/taro'
 import { useLoad } from '@tarojs/taro'
 import { ref } from 'vue'
@@ -28,8 +28,6 @@ const orderTabValue = ref<number>(0)
 
 function changeTabList(tab: any) {
     orderTabValue.value = tab.paneKey as number
-
-    console.log(orderTabValue.value)
 }
 
 
@@ -65,19 +63,7 @@ function changeTabList(tab: any) {
         <!-- 全部订单 -->
         <view  v-if="orderTabValue == 0" class="order-content-all">
 
-            <!-- 订单 -->
-            <OrderDetail/>
-
-            <!-- 分隔线 -->
-            <view class="split-line">
-                <view class="split-line-top">
-                    <view class="split-line-top-line"></view>
-                    已显示全部订单
-                    <view class="split-line-top-line"></view>
-                </view>
-
-                <div class="split-line-bottom">订单仅支持查看概要</div>
-            </view>
+            <OrderScroll/>
 
         </view>
       
@@ -192,48 +178,12 @@ function changeTabList(tab: any) {
 
 
     .order-content-all {
-        box-sizing: border-box;
-        padding: 31px 46px 0 46px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        row-gap: 31px;
-
-        .split-line {
-            height: 61.54px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;            
-            row-gap: 6px;            
-
-            .split-line-top {
-                height: 30.77px;
-                font-size: 20px;
-                color: #B4C2C2;
-                display: flex;
-                align-items: center;
-                column-gap: 6px;
-
-                .split-line-top-line {
-                    width: 190.38px;
-                    height: 1.92px;
-                    background: #DFE5E6;                    
-                }
-            }
-
-            .split-line-bottom {
-                font-size: 19.23px;
-                color: #DFE5E6;
-            }
-        }
+        height: calc(100vh - 253.85px);
     }
 
 
     .order-content-other {
-        width: 100%;
-        height: 1125px;
+        height: calc(100vh - 253.85px);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -246,7 +196,7 @@ function changeTabList(tab: any) {
         }
 
         .other-text {
-            font-size: 23px;
+            font-size: 26px;
             color: #B4C2C2;
         }
     }

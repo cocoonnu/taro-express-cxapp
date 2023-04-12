@@ -16,7 +16,8 @@
         "baseUrl": ".",
         "rootDir": ".",
         "jsx": "preserve",
-        "allowJs": false,
+        "allowJs": false, // 不允许我们在 TypeScript 项目中导入 JavaScript 文件
+        "checkJs": false, // 禁用 TypeScript 项目中 JavaScript 文件的所有错误报告
         "resolveJsonModule": true,
         "typeRoots": [
             "node_modules/@types"
