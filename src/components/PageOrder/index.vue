@@ -1,5 +1,28 @@
 <script setup lang="ts">
 import travelAircraft from '@/assets/images/travelAircraft.png'
+import type { PropType } from 'vue'
+
+
+interface UserOrderList {
+    startPlace: string,
+    price: number,
+    rightCityName: string,
+    leftCityName: string,
+    flightNum: string,
+    startTime: string,
+    startDayDate: string
+}
+
+
+let props = defineProps({
+
+    orderItem: {
+        type: Object as PropType<UserOrderList>,
+        require: true
+    }
+
+})
+
 </script>
 
 
@@ -15,22 +38,26 @@ import travelAircraft from '@/assets/images/travelAircraft.png'
 
             <view class="content-route-Pay">
                 <view class="content-route">
-                    <view style="color: #14B2B5;">EU2280</view>
-                    <view style="color: #222625;">上海 - 深圳</view>
+                    <view class="color14B2B5">{{ orderItem?.flightNum }}</view>
+                    <view class="color222625">
+                        {{ orderItem?.leftCityName }} - {{ orderItem?.rightCityName }}
+                    </view>
                 </view>
 
-                <view class="content-pay">¥ 1680</view>
+                <view class="content-pay">¥ {{ orderItem?.price }}</view>
             </view>
 
             
             <view class="content-time">
-                <view style="color: #B4C2C2;">出发时间：</view>
-                <view style="color: #222625;">3月2日</view>
-                <view style="color: #222625;">10:15</view>
+                <view class="colorB4C2C2">出发时间：</view>
+                <view class="color222625">{{ orderItem?.startDayDate }}</view>
+                <view class="color222625">{{ orderItem?.startTime }}</view>
             </view>
 
 
-            <view class="content-seat" style="color: #B4C2C2;">02车02B号</view>
+            <view class="content-seat colorB4C2C2">
+                {{ orderItem?.startPlace }}
+            </view>
 
 
             <view class="content-explain">
@@ -89,8 +116,12 @@ import travelAircraft from '@/assets/images/travelAircraft.png'
             align-items: center;
 
             .content-route {
+                width: fit-content;
+                height: 34.62px;
+                line-height: 34.62px;
                 display: flex;
-                column-gap: 8px;
+                align-items: center;
+                column-gap: 10px;
             }
 
             .content-pay {
@@ -136,6 +167,18 @@ import travelAircraft from '@/assets/images/travelAircraft.png'
             }
         }
 
+    }
+
+    .color14B2B5 {
+        color: #14B2B5;
+    }
+
+    .color222625 {
+        color: #222625;
+    }
+
+    .colorB4C2C2 {
+        color: #B4C2C2;
     }
 }
 </style>

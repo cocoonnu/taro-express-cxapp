@@ -51,6 +51,9 @@ async function clickDateItem(dateItem: DateValue) {
     // 修改日历默认选中日期
     homeStore.chooseDate = formatDate(dateItem.date) 
 
+    // 使下面的内容区回到顶部
+    Taro.eventCenter.trigger('toTopFlightInfo')
+
     // 刷新机票信息数组
     tools.showLoading()
     await orderStore.fetchFlightInfoArr()

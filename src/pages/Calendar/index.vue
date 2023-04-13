@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { extract, extractDate, getDayDiff, formatDate } from '@/utils/time'
+import { extractDate, getDayDiff, formatDate } from '@/utils/time'
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import { useHoemStore } from '@/store/home'
 import tools from '@/utils/tools'

@@ -20,16 +20,16 @@ onMounted(async () => {
         visible.value = true
         cityLocation.value = cl
     })
-    
+
 
     // 初始化城市数据
-    getCityList(cityList)
+    // getCityList(cityList)
 })
 
 onBeforeUnmount(() => {
     Taro.eventCenter.off('showCityChoose')
 })
- 
+
 
 // 组件显示与隐藏
 let visible = ref<boolean>(false)
@@ -55,7 +55,7 @@ function finshChoose(params: any) {
         homeStore.leftCityName = params[1]
         homeStore.startPlace = params[2]
     }
-    
+
     if (cityLocation.value == 'right') homeStore.rightCityNme = params[1]
 
     tools.showToast(`已选择${params[2]}`)
@@ -66,7 +66,6 @@ function finshChoose(params: any) {
 
 
 <template>
-    
     <nut-cascader
         title="地址选择"
         v-model:visible="visible"
@@ -74,7 +73,6 @@ function finshChoose(params: any) {
         @change="finshChoose"
         :options="cityList"
     ></nut-cascader>
-
 </template>
 
 
@@ -88,7 +86,6 @@ function finshChoose(params: any) {
     --nut-tabs-titles-item-font-size: 26px;
     --nut-cascader-item-active-color: #14B2B5;
     --nut-cascader-tabs-item-padding: 0px 0px;
-    --nut-tabs-horizontal-titles-item-active-line-width: 26px;
 
 
     .nut-popup--bottom.round {
@@ -112,7 +109,7 @@ function finshChoose(params: any) {
         }
 
         .nut-tabs__titles-item__text.ellipsis {
-            margin: 30px;            
+            margin: 30px;
         }
 
         .nutui-iconfont {

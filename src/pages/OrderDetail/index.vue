@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import FlightItem from '@/components/FlightInfo/FlightItem/index.vue'
 import arrowLeft from '@/assets/images/arrowLeft.png'
 import uncolor from '@/assets/images/uncolor.png'
 import color from '@/assets/images/color.png'

@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import downIcon from '@/assets/images/down.png'
 import OrderNull from '@/assets/images/null.png'
-import checkLogin from '@/utils/checkLogin'
 import OrderScroll from '@/components/OrderScroll/index.vue'
+import OrderFrame from '@/components/OrderFrame/index.vue'
+import { useOrderStore } from '@/store/order'
+import checkLogin from '@/utils/checkLogin'
+import { useDidShow } from '@tarojs/taro'
 import Taro from '@tarojs/taro'
-import { useLoad } from '@tarojs/taro'
 import { ref } from 'vue'
 
+const orderStore = useOrderStore()
 
-// 如果未登录则跳转
-useLoad(async function() {
-    // 判断是否登录
+
+// 页面展示时执行
+useDidShow(async function() {
+
+    // 如果未登录则跳转
     let res = await checkLogin()
-
     if (!res) {
 
         // 跳转到登录页
@@ -20,15 +24,13 @@ useLoad(async function() {
             url: '/pages/WeLogin/index?path=/pages/Order/index'
         })
     }
+
+    // 查询获取订单页用户订单数组
+    await orderStore.getOrderList()
 })
 
 
-const orderTabValue = ref<number>(0)
-
-
-function changeTabList(tab: any) {
-    orderTabValue.value = tab.paneKey as number
-}
+const orderTabValue = ref<string>('0')
 
 
 </script>
@@ -37,6 +39,7 @@ function changeTabList(tab: any) {
 <template>
     <view class="order-container">
 
+        <!-- 顶部 -->
         <view class="order-top">
             <view class="top-content">
                 <view class="top-content-text">全部订单</view>
@@ -44,31 +47,21 @@ function changeTabList(tab: any) {
             </view>
         </view>
 
- 
-        <nut-navbar>
-            <template #content>
-                <nut-tabs v-model="orderTabValue" @click="changeTabList">
 
-                    <!-- 默认tab.paneKey：0、1、2、3  -->
-                    <nut-tab-pane title="全部"></nut-tab-pane>
-                    <nut-tab-pane title="待支付"></nut-tab-pane>
-                    <nut-tab-pane title="待出行"></nut-tab-pane>
-                    <nut-tab-pane title="已完成"></nut-tab-pane>
-
-                </nut-tabs>
-            </template>
-        </nut-navbar>
+        <!-- tab栏 -->
+        <OrderFrame v-model:orderTabValue="orderTabValue" /> 
 
 
-        <!-- 全部订单 -->
-        <view  v-if="orderTabValue == 0" class="order-content-all">
-
+        <!-- 显示用户订单 -->
+        <view  
+            v-if="orderTabValue == '0' && orderStore.userOrderList.length > 0"
+            class="order-content-all"
+        >
             <OrderScroll/>
-
         </view>
       
 
-        <!-- 其他订单 -->
+        <!-- 显示空订单 -->
         <view v-else class="order-content-other">
             <image :src="OrderNull"/>
             <view class="other-text">当前暂无数据</view>
@@ -108,71 +101,6 @@ function changeTabList(tab: any) {
                 width: 46.15px;
                 height: 46.15px;                
             }
-        }
-    }
-
-
-    .nut-navbar {
-        height: 84.62px;
-        padding: 0;
-        box-shadow: none;
-        background-color: #fff;
-        margin-bottom: 0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-
-        .nut-navbar__title {
-            width: 580.77px;
-            height: 61.54px;            
-            margin-top: 23px;            
-        }
-
-        .nut-tabs {
-            width: 100%;
-            height: 100%;
-
-            .nut-tabs__titles {
-                height: 100%;
-                padding: 0;
-            }
-
-            .nut-tabs__list {
-                height: 100%;
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start;
-                column-gap: 81px;
-
-                .nut-tabs__titles-item {
-                    width: 61.54px;
-                    height: 61.54px;          
-                    font-size: 28px;
-                    color: #222625;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    &.active {
-                        color: #14B2B5;
-                        font-weight: 500;
-                    }
-                }
-            }
-        }
-
-        .nut-tabs__titles-item__smile, 
-        .nut-tabs__titles-item__line {
-            bottom: 0;
-            height: 7px;
-            background: #14B2B5;
-        }
-    
-        .nut-tabs__titles-item.active 
-        .nut-tabs__titles-item__line {
-            width: 100%;
-            height: 7px;
-            background: #14B2B5;
         }
     }
 

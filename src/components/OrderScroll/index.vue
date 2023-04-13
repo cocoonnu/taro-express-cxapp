@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import PageOrder from '@/components/PageOrder/index.vue'
-import { ref } from 'vue'
+import { useOrderStore } from '@/store/order'
+import { ref, computed } from 'vue'
+
+const orderStore = useOrderStore()
+
+
+// 用户订单数组
+const orderList = computed(() => orderStore.userOrderList)
 
 // 滚动条位置
 let scrollTop = ref<number>(0)
@@ -22,8 +29,13 @@ let scrollTop = ref<number>(0)
             <view class="scroll-view-top"></view>
 
             
-            <PageOrder class="scroll-view-item"/>
-            <PageOrder class="scroll-view-item"/>
+            <view
+                class="scroll-view-item"
+                v-for="(item, index) in orderList"
+                :key="index"
+            >
+                <PageOrder :orderItem="item"/>
+            </view>
 
 
             <view class="split-line">
@@ -46,7 +58,7 @@ let scrollTop = ref<number>(0)
 .order-scroll {
     width: 100%;
     height: 100%;
-    padding: 0px 46px 31px 46px;
+    padding: 0px 46px 0px 46px;
     box-sizing: border-box;
 
     .scroll-view-container {
@@ -57,6 +69,7 @@ let scrollTop = ref<number>(0)
         }
         
         .scroll-view-item {
+            width: fit-content;
             margin-top: 31px;
 
             &:nth-child(2) {
@@ -65,13 +78,12 @@ let scrollTop = ref<number>(0)
         }
 
         .split-line {
-            height: 61.54px;
+            height: 130px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;            
             row-gap: 6px;      
-            margin-top: 40px;      
 
             .split-line-top {
                 height: 30.77px;

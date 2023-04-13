@@ -1,9 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useOrderStore } from '@/store/order'
 import FlightItem from './FlightItem/index.vue'
 import Taro from '@tarojs/taro'
 const orderStore = useOrderStore()
+
+
+onMounted(function() {
+
+    // 监听事件 点击顶部日历栏时回到顶部
+    Taro.eventCenter.on('toTopFlightInfo', () => {
+        scrollTop.value = 0
+    })
+
+})
 
 
 // 异步加载数据
@@ -15,7 +25,7 @@ let filghtArr = computed(() => orderStore.flightInfoArr)
 
 
 // 滚动条位置
-let scrollTop = ref<number>(0)
+let scrollTop = ref<number>(-1)
 
 
 // 跳转到订单详细页
@@ -51,6 +61,7 @@ function goOrderDetail(flightItemInfo) {
                 class="scroll-view-item" 
                 v-for="(item, index) in filghtArr"
                 :key="index"
+                :id="`scroll-view-item${index}`"
                 @click="goOrderDetail(item)"
             >
                 <FlightItem :flightItemInfo="item"/>

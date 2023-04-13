@@ -2,11 +2,8 @@
 import HomeTop from '@/components/HomeTop/index.vue'
 import BuyFrame from '@/components/BuyFrame/index.vue'
 import CityChoose from '@/components/CityChoose/index.vue'
-// import OrderItem from '@/components/OrderItem/index.vue'
-// import SwiperBox from '@/components/SwiperBox/index.vue'
-// import Taro from '@tarojs/taro'
-// import tools from '@/utils/tools'
-// import { reactive, computed } from 'vue'
+import OrderItem from '@/components/OrderItem/index.vue'
+import SwiperBox from '@/components/SwiperBox/index.vue'
 
 </script>
 
@@ -27,8 +24,7 @@ import CityChoose from '@/components/CityChoose/index.vue'
         <OrderItem/>
 
         <!-- 轮播图 -->
-        <!-- <SwiperBox/> -->
-
+        <SwiperBox/>
 
         <!-- 城市选择模态框 -->
         <CityChoose/>
