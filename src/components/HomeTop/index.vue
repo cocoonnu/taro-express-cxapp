@@ -74,10 +74,8 @@ async function applyLocation() {
             homeStore.leftCityName = cityName.substr(0, cityName.length - 1)
 
         } else {
-            console.log('已授权，获取定位中')
-            
 
-            // 获取定位
+            // 已授权 获取定位
             Taro.getFuzzyLocation({
                 type: 'gcj02',
 

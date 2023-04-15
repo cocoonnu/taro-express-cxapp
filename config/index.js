@@ -26,7 +26,10 @@ const config = {
     sourceRoot: 'src',
     outputRoot: 'dist',
 
-    plugins: ['@tarojs/plugin-html', 'taro-plugin-pinia'],
+    plugins: [
+        '@tarojs/plugin-html', 
+        'taro-plugin-pinia',
+    ],
 
     sass: {
         data: `

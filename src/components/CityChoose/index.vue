@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import getCityList from '@/hooks/CityChoose/getCityList'
-import { useHoemStore } from '@/store/home'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { getCityList } from './hook/cityList'
+import { useHoemStore } from '@/store/home'
 import tools from '@/utils/tools'
 import Taro from '@tarojs/taro'
-
-
-// 仓库
 const homeStore = useHoemStore()
 
 
-// 组件初始化函数
 onMounted(async () => {
 
     // 绑定打开城市选择组件事件
@@ -23,8 +19,18 @@ onMounted(async () => {
 
 
     // 初始化城市数据
-    // getCityList(cityList)
+    cityList.value = await getCityList()
+    // if (Taro.getStorageSync('cityList')) {
+
+    //     cityList.value = Taro.getStorageSync('cityList')
+
+    // } else {
+
+    //     cityList.value = await getCityList()
+    //     Taro.setStorageSync('cityList', cityList.value)
+    // }
 })
+
 
 onBeforeUnmount(() => {
     Taro.eventCenter.off('showCityChoose')
@@ -40,7 +46,7 @@ let cityValue = ref([])
 
 
 // 城市机场数据
-let cityList = ref([])
+let cityList = ref<any>([])
 
 
 // 左边还是右边城市

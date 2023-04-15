@@ -1,12 +1,29 @@
 <script setup lang="ts">
 import orderAircraft from '@/assets/images/orderAircraft.png'
 import right from '@/assets/images/right.png'
+import { useOrderStore } from '@/store/order'
+import { computed, onMounted } from 'vue'
+import Taro from '@tarojs/taro'
+const orderStore = useOrderStore()
+
+onMounted(async function() {
+
+    // 查询获取订单页用户订单数组
+    await orderStore.getOrderList()
+})
+
+// 用户订单数组
+const homeOrderItem = computed(() => orderStore.userOrderList[0])
+
+
+function toOrderPage() {
+    Taro.switchTab({ url: '/pages/Order/index' })
+}
 </script>
 
 
 <template>
-    <view class="order-item">
-
+    <view class="order-item" v-if="homeOrderItem">
         <view class="order-item-content">
 
             <view class="order-item-content-icon">
@@ -16,22 +33,26 @@ import right from '@/assets/images/right.png'
 
             <view class="order-item-content-text">
                 <view class="order-item-content-text-item">
-                    <view style="color: #B4C2C2;">本人行程：</view>
-                    <view style="color: #14B2B5;">EU2280</view>
-                    <view style="color: #222625;">上海 - 深圳</view>
+                    <view class="colorB4C2C2">本人行程：</view>
+                    <view class="color14B2B5">
+                        {{ homeOrderItem.flightNum }}
+                    </view>
+                    <view class="color222625">
+                        {{ homeOrderItem.leftCityName }} - {{ homeOrderItem.rightCityName }}
+                    </view>
                 </view>
 
                 <view class="order-item-content-text-item">
-                    <view style="color: #B4C2C2;">出发时间：</view>
-                    <view style="color: #222625;">3月2日</view>
-                    <view style="color: #222625;">10:15</view>
+                    <view class="colorB4C2C2">出发时间：</view>
+                    <view class="color222625">{{ homeOrderItem.startDayDate }}}</view>
+                    <view class="color222625">{{ homeOrderItem.startTime }}</view>
                 </view>
             </view>
         </view>
 
 
-        <view class="order-item-skip">
-            <view style="color: #B4C2C2;">机票详情</view>
+        <view class="order-item-skip" @click="toOrderPage">
+            <view class="colorB4C2C2">机票详情</view>
             <image :src="right"></image>
         </view>
     </view>
@@ -101,5 +122,17 @@ import right from '@/assets/images/right.png'
         }
     }
 
+
+    .color14B2B5 {
+        color: #14B2B5;
+    }
+
+    .color222625 {
+        color: #222625;
+    }
+
+    .colorB4C2C2 {
+        color: #B4C2C2;
+    }
 }
 </style>

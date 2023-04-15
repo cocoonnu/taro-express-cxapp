@@ -97,11 +97,11 @@ function loginCallBack(status: number) {
 
         <view class="login-image"><image :src="loginpng"/></view>
 
-        <button class="login-bth" @click="weChatLogin" open-type="getUserInfo">
+        <view class="login-bth" @click="weChatLogin">
             一键微信登录
-        </button>
+        </view>
 
-        <button class="login-bth cancel" @click="goBack">暂不微信登录</button>
+        <view class="login-bth cancel" @click="goBack">暂不微信登录</view>
 
     </view>
 </template>

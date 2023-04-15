@@ -17,7 +17,6 @@ declare module '@vue/runtime-core' {
     HomeTop: typeof import('./src/components/HomeTop/index.vue')['default']
     NutCalendar: typeof import('@nutui/nutui-taro')['Calendar']
     NutCascader: typeof import('@nutui/nutui-taro')['Cascader']
-    NutCell: typeof import('@nutui/nutui-taro')['Cell']
     NutCheckbox: typeof import('@nutui/nutui-taro')['Checkbox']
     NutCheckboxGroup: typeof import('@nutui/nutui-taro')['CheckboxGroup']
     NutEmpty: typeof import('@nutui/nutui-taro')['Empty']
