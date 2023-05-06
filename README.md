@@ -23,13 +23,13 @@
 
 
 
-- 项目服务端使用了 Mysql 来存储用户 openid、订单信息、机场信息等数据，同时使用 Express 框架来部署接口，供前端项目调用。并使用 axios 从网络中爬取数据存储到本地数据库中。
+- 项目服务端使用了 Mysql 来存储用户 openid、订单信息、机场信息等数据，同时使用 Express 框架来部署接口，供前端项目调用。并使用 Axios 从网络中爬取数据存储到本地数据库中。
 
 
 
 所用到的技术栈有：
 
-Taro、Vue3、Pinia、Typescript、ES6、Sass、Mock、Express、Mysql、axios、Webpack、微信小程序等
+Taro、Vue3、Pinia、Typescript、ES6、Sass、Mockjs、Express、Mysql、Axios、Webpack、微信小程序等
 
 
 

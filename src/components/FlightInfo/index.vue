@@ -11,6 +11,7 @@ onMounted(function() {
     // 监听事件 点击顶部日历栏时回到顶部
     Taro.eventCenter.on('toTopFlightInfo', () => {
         scrollTop.value = 0
+        setTimeout(() => { scrollTop.value = -1 }, 1000)
     })
 
 })

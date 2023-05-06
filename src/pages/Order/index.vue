@@ -23,10 +23,11 @@ useDidShow(async function() {
         Taro.navigateTo({
             url: '/pages/WeLogin/index?path=/pages/Order/index'
         })
-    }
 
-    // 查询获取订单页用户订单数组
-    await orderStore.getOrderList()
+    } else {
+        // 查询获取订单页用户订单数组
+        await orderStore.getOrderList()
+    }
 })
 
 

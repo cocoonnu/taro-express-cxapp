@@ -8,7 +8,7 @@ import tools from '@/utils/tools'
 
 // 返回上一页
 async function goBack() {
-    Taro.navigateBack()    
+    Taro.switchTab({url: '/pages/Home/index'})
 }
 
 
