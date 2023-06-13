@@ -1,5 +1,3 @@
-![taro-express-cxapp](https://socialify.git.ci/cocoonnu/taro-express-cxapp/image?description=1&descriptionEditable=%E4%B8%80%E6%AC%BE%20OTA%20%E5%87%BA%E8%A1%8C%E9%A1%B9%E7%9B%AE%EF%BC%8CTaro3%20%2B%20Mysql%20%2B%20Express%20%2B%20Vue3&font=Bitter&language=1&name=1&owner=1&pattern=Solid&theme=Dark)
-
 #### 出行微信小程序介绍
 
 一款 OTA 出行项目，融入前后端全栈技术，使用开放式跨端跨框架 Taro 创建微信小程序。
